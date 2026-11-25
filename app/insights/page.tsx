@@ -1,20 +1,17 @@
 import { pageMetadata } from "@/lib/site";
 import Link from "next/link";
 import { Button } from "@/components/Button";
-import { CardTitle } from "@/components/CardTitle";
 import { Eyebrow } from "@/components/Eyebrow";
 import { HeroTitle } from "@/components/Heading";
 import { ImageBlock } from "@/components/ImageBlock";
+import { InsightsGrid, type Story } from "@/components/InsightsGrid";
 import { Mono } from "@/components/Mono";
 import { PageShell } from "@/components/PageShell";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
-import { cn } from "@/lib/cn";
-import { img, type ImageSrc } from "@/lib/images";
+import { img } from "@/lib/images";
 
-const FILTERS = ["All", "Case studies", "Articles", "Game launches", "News"];
-
-const STORIES: { kind: string; title: string; date: string; src: ImageSrc; position?: string }[] = [
+const STORIES: Story[] = [
   { kind: "Case study", title: "Spotify × Gamr: where music meets gaming", date: "10 Aug 2026", src: img.spotifyCase },
   { kind: "Case study", title: "Launching Prime Hydration to Nigeria’s gamers", date: "9 Aug 2026", src: img.caseHero },
   { kind: "Game launch", title: "My City Life: New York is live on web", date: "Oct 2026", src: img.mcl1 },
@@ -68,39 +65,7 @@ export default function InsightsPage() {
 
       <Section tone="alt">
         <SectionHeading eyebrow="Latest" title="New from Gamr." />
-        <div className="mb-8 flex flex-wrap gap-2.5" role="group" aria-label="Filter by type">
-          {FILTERS.map((f, i) => (
-            <button
-              key={f}
-              type="button"
-              aria-pressed={i === 0}
-              className={cn(
-                "min-h-11 cursor-pointer rounded-none border-2 px-4.5 py-0 font-sans text-[13px] font-bold tracking-[0.08em] uppercase",
-                i === 0 ? "border-white bg-white text-black" : "border-line-strong bg-transparent text-white",
-              )}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          {STORIES.map((s) => (
-            <Link key={s.title} className="flex flex-col border border-line bg-surface" href="/insights">
-              <ImageBlock
-                src={s.src}
-                alt={s.title}
-                sizes="(min-width: 761px) 33vw, 100vw"
-                className="border-b border-line md:h-[200px]"
-                position={s.position}
-              />
-              <div className="flex flex-col gap-3 p-6">
-                <Mono tone="blue">{s.kind}</Mono>
-                <CardTitle size={20}>{s.title}</CardTitle>
-                <Mono>{s.date}</Mono>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <InsightsGrid stories={STORIES} />
         <div className="mt-10 flex justify-center">
           <Button href="/insights" variant="ghost">
             Load More

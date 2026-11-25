@@ -101,7 +101,7 @@ export default function ContactPage() {
             <div className="flex flex-col">
               <div className="border-b border-line">
                 {DETAILS.map((d) => (
-                  <div key={d.label} className="flex items-start gap-4 border-t border-line px-0 py-5">
+                  <div key={d.label} className="flex items-start gap-4 border-t border-line py-5">
                     <Icon name={d.icon} className="block flex-none text-blue-text" />
                     <div className="flex flex-col gap-1.5">
                       <Mono>{d.label}</Mono>
