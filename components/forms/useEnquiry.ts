@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import type { EnquiryResult } from "@/lib/enquiry";
+import type { EnquiryResult } from "@/lib/enquiry-options";
 
 type State =
   { status: "idle" | "pending" } | { status: "success" } | { status: "error"; error: string; fieldErrors: Record<string, string> };

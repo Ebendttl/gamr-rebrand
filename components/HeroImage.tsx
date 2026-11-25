@@ -11,7 +11,16 @@ type Props = { src: ImageSrc; className: string; position?: string };
 export function HeroImage({ src, className, position = "center" }: Props) {
   return (
     <div aria-hidden="true" className={cn("relative h-[280px] w-full md:absolute md:top-0 md:right-0 md:bottom-0 md:h-auto", className)}>
-      <Image src={src} alt="" fill priority sizes="(min-width: 761px) 60vw, 100vw" className="object-cover" style={{ objectPosition: position }} />
+      <Image
+        src={src}
+        alt=""
+        fill
+        preload
+        fetchPriority="high"
+        sizes="(min-width: 761px) 60vw, 100vw"
+        className="object-cover"
+        style={{ objectPosition: position }}
+      />
       <div className="absolute inset-0 bg-[image:linear-gradient(90deg,#000000_0%,rgba(0,0,0,0.55)_30%,rgba(0,0,0,0.1)_65%,rgba(0,0,0,0)_100%),linear-gradient(0deg,#000000_0%,rgba(0,0,0,0)_35%)]" />
     </div>
   );

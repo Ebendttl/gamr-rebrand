@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CONTACT_INTENTS } from "@/lib/enquiry";
+import { CONTACT_INTENTS } from "@/lib/enquiry-options";
 import { CONTROL, Consent, Field, FormStatus, Honeypot, Submit, invalid } from "./fields";
 import { useEnquiry } from "./useEnquiry";
 

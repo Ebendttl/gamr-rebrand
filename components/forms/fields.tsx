@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
-import { HONEYPOT } from "@/lib/enquiry";
+import { HONEYPOT } from "@/lib/enquiry-options";
 
 export const CONTROL =
   "box-border min-h-13 w-full rounded-none border border-line-strong bg-field px-3.5 py-3 font-sans text-[16px] text-white aria-[invalid=true]:border-white";

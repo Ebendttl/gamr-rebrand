@@ -15,7 +15,15 @@ export function HeroCrossfade({ frames }: { frames: [ImageSrc, ImageSrc, ImageSr
       <div aria-hidden="true">
         {frames.map((src, i) => (
           <div key={src} data-xf-frame="" className={cn(styles.frame, "absolute inset-0")} style={{ animationDelay: DELAYS[i] }}>
-            <Image src={src} alt="" fill priority={i === 0} sizes="100vw" className="object-cover" />
+            <Image
+              src={src}
+              alt=""
+              fill
+              preload={i === 0}
+              fetchPriority={i === 0 ? "high" : "low"}
+              sizes="100vw"
+              className="object-cover"
+            />
           </div>
         ))}
       </div>

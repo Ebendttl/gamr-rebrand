@@ -9,14 +9,24 @@ type Props = {
   className?: string;
   position?: string;
   sizes?: string;
-  priority?: boolean;
+  /** Above-the-fold LCP image: preload with high fetch priority. */
+  preload?: boolean;
 };
 
 /** Cover-fit image box: 4:3 on mobile, fixed height from 761 px up. */
-export function ImageBlock({ src, alt, className, position = "center", sizes = "(min-width: 761px) 50vw, 100vw", priority }: Props) {
+export function ImageBlock({ src, alt, className, position = "center", sizes = "(min-width: 761px) 50vw, 100vw", preload = false }: Props) {
   return (
     <div className={cn("relative box-border block aspect-[4/3] w-full overflow-hidden md:aspect-auto", className)}>
-      <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" style={{ objectPosition: position }} />
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes={sizes}
+        preload={preload}
+        fetchPriority={preload ? "high" : undefined}
+        className="object-cover"
+        style={{ objectPosition: position }}
+      />
     </div>
   );
 }

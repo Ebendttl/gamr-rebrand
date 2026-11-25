@@ -1,6 +1,6 @@
 "use client";
 
-import { BRIEF_TOPICS, BUDGETS, CAPABILITIES, UPLOAD_ACCEPT } from "@/lib/enquiry";
+import { BRIEF_TOPICS, BUDGETS, CAPABILITIES, UPLOAD_ACCEPT } from "@/lib/enquiry-options";
 import { CONTROL, Consent, Field, FormStatus, Honeypot, Submit, invalid } from "./fields";
 import { useEnquiry } from "./useEnquiry";
 

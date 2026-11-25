@@ -22,10 +22,7 @@ export function Timeline({ steps }: { steps: TimelineStep[] }) {
         {steps.map((step, i) => {
           const last = i === steps.length - 1;
           return (
-            <li
-              key={step.title}
-              className="relative grid grid-cols-[48px_1fr] gap-3.5 pb-6.5 md:flex md:flex-col md:pr-3 md:pb-0"
-            >
+            <li key={step.title} className="relative grid grid-cols-[48px_1fr] gap-3.5 pb-6.5 md:flex md:flex-col md:pr-3 md:pb-0">
               <div className="hidden h-4 md:block">
                 <Mono size={10}>{step.label}</Mono>
               </div>

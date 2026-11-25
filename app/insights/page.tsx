@@ -45,6 +45,7 @@ export default function InsightsPage() {
             <ImageBlock
               src={img.labTalk}
               alt="A session at the Lab, University of Lagos"
+              preload
               sizes="(min-width: 761px) 60vw, 100vw"
               className="md:h-[440px]"
               position="center 45%"

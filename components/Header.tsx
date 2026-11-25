@@ -22,7 +22,7 @@ export function Wordmark({ height }: { height: 30 | 36 }) {
         alt="gamr"
         width={293}
         height={80}
-        priority={height === 30}
+        preload={height === 30}
         className={cn("block w-auto", height === 30 ? "h-7.5" : "h-9")}
       />
     </Link>
