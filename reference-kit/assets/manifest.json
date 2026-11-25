@@ -1,0 +1,134 @@
+{
+ "photos/team-lab-launch.jpg": {
+  "key": "team",
+  "kb": 267
+ },
+ "photos/gamr-team.jpg": {
+  "key": "squad",
+  "kb": 211
+ },
+ "photos/lab-session-talk.jpg": {
+  "key": "glab_talk",
+  "kb": 218
+ },
+ "photos/lab-workstations-guests.jpg": {
+  "key": "glab_desk",
+  "kb": 216
+ },
+ "photos/lab-room-guests.jpg": {
+  "key": "glab_room",
+  "kb": 171
+ },
+ "photos/lab-room.jpg": {
+  "key": "glab_empty",
+  "kb": 157
+ },
+ "photos/lab-workstations.jpg": {
+  "key": "studios",
+  "kb": 111
+ },
+ "photos/carven-lounge.jpg": {
+  "key": "casehero",
+  "kb": 87
+ },
+ "photos/esports-event.jpg": {
+  "key": "esports",
+  "kb": 135
+ },
+ "games/my-city-life-1.jpg": {
+  "key": "mcl1",
+  "kb": 167
+ },
+ "games/my-city-life-2.jpg": {
+  "key": "mcl2",
+  "kb": 162
+ },
+ "games/my-city-life-3.jpg": {
+  "key": "mcl3",
+  "kb": 145
+ },
+ "games/afrodrive-illustration.jpg": {
+  "key": "afro",
+  "kb": 66
+ },
+ "games/crossroads-concept-illustration.jpg": {
+  "key": "crossroads",
+  "kb": 50
+ },
+ "games/unannounced-teaser.jpg": {
+  "key": "teaser",
+  "kb": 22
+ },
+ "case-studies/spotify.jpg": {
+  "key": "spotifycase",
+  "kb": 28
+ },
+ "brand/gamr-wordmark.png": {
+  "key": "wordmark",
+  "kb": 9
+ },
+ "video/build-africa-on-roblox.mp4": {
+  "key": "herovid",
+  "kb": 217
+ },
+ "slides/idea-to-launch-1.jpg": {
+  "key": "proc0",
+  "kb": 129
+ },
+ "slides/idea-to-launch-2.jpg": {
+  "key": "proc1",
+  "kb": 72
+ },
+ "slides/idea-to-launch-3.jpg": {
+  "key": "proc2",
+  "kb": 65
+ },
+ "slides/idea-to-launch-4.jpg": {
+  "key": "proc3",
+  "kb": 82
+ },
+ "slides/idea-to-launch-5.jpg": {
+  "key": "proc4",
+  "kb": 82
+ },
+ "slides/idea-to-launch-6.jpg": {
+  "key": "proc5",
+  "kb": 109
+ },
+ "logos/google-white.png": {
+  "key": "logo_google",
+  "kb": 3
+ },
+ "logos/lenovo-white.png": {
+  "key": "logo_lenovo",
+  "kb": 9
+ },
+ "logos/logitech-white.png": {
+  "key": "logo_logitech",
+  "kb": 11
+ },
+ "logos/spotify-white.png": {
+  "key": "logo_spotify",
+  "kb": 7
+ },
+ "logos/techstars-white.png": {
+  "key": "logo_techstars",
+  "kb": 12
+ },
+ "logos/ballantines-white.png": {
+  "key": "logo_ballantines",
+  "kb": 15
+ },
+ "logos/nivea-white.png": {
+  "key": "logo_nivea",
+  "kb": 3
+ },
+ "logos/goldenpenny-white.png": {
+  "key": "logo_goldenpenny",
+  "kb": 4
+ },
+ "logos/carven-white.png": {
+  "key": "logo_carven",
+  "kb": 11
+ }
+}
