@@ -1,0 +1,67 @@
+/* No Tailwind preflight: the approved reference relies on browser defaults (plus body{margin:0}),
+   so we load only the theme and utilities layers to render identically. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme {
+  --color-*: initial;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-transparent: transparent;
+  --color-bg: #000000;
+  --color-bg-alt: #050505;
+  --color-surface: #09090b;
+  --color-field: #18181b;
+  --color-line: #27272a;
+  --color-line-strong: #3f3f46;
+  --color-text: #ffffff;
+  --color-soft: #d1d5db;
+  --color-muted: #9ca3af;
+  --color-blue: #2563eb;
+  --color-blue-text: #3b82f6;
+  --color-red: #dc2626;
+
+  --font-*: initial;
+  --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --breakpoint-*: initial;
+  --breakpoint-md: 761px;
+  --breakpoint-lg: 1025px;
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@layer base {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+  body {
+    margin: 0;
+    background: #000;
+  }
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #3b82f6;
+  }
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  summary:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 3px;
+  }
+}
