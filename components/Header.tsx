@@ -57,7 +57,11 @@ export function Header({ active }: { active: NavKey }) {
                 {link}
                 <div className="absolute top-full -left-4.5 z-20 hidden min-w-[200px] border border-line-strong bg-surface group-focus-within:block group-hover:block">
                   {item.children.map((c) => (
-                    <Link key={c.label} href={c.href} className="flex min-h-11 items-center border-t border-line px-4.5 text-[14px] font-semibold">
+                    <Link
+                      key={c.label}
+                      href={c.href}
+                      className="flex min-h-11 items-center border-t border-line px-4.5 text-[14px] font-semibold"
+                    >
                       {c.label}
                     </Link>
                   ))}

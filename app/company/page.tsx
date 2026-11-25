@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { Button } from "@/components/Button";
+import { ButtonGroup } from "@/components/ButtonGroup";
 import { Card } from "@/components/Card";
 import { CardTitle } from "@/components/CardTitle";
 import { Eyebrow } from "@/components/Eyebrow";
+import { Body, H2, HeroLead, HeroTitle } from "@/components/Heading";
 import { HeroImage } from "@/components/HeroImage";
-import { Icon } from "@/components/Icon";
+import { Icon, type IconName } from "@/components/Icon";
 import { IconBox } from "@/components/IconBox";
 import { ImageBlock } from "@/components/ImageBlock";
 import { Mono } from "@/components/Mono";
@@ -12,17 +14,186 @@ import { PageShell } from "@/components/PageShell";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextLink } from "@/components/TextLink";
-import { img } from "@/lib/images";
+import { img, type ImageSrc } from "@/lib/images";
+
+const PARTS: { icon: IconName; title: string; text: string; link: string; href: string }[] = [
+  { icon: "gamepad", title: "Games", text: "Original games from Gamr Studios.", link: "Games →", href: "/games" },
+  {
+    icon: "rocket",
+    title: "Publishing",
+    text: "A selective publishing route for African studios.",
+    link: "Publishing →",
+    href: "/publishing",
+  },
+  { icon: "book", title: "Lab", text: "The talent and developer pipeline.", link: "Lab →", href: "/lab" },
+  {
+    icon: "target",
+    title: "Managed Services",
+    text: "The commercial offer for brands and agencies.",
+    link: "For Brands →",
+    href: "/for-brands",
+  },
+];
+
+/** Stand-ins: initials tiles until approved headshots arrive (see README). */
+const LEADERS = [
+  {
+    initials: "EE",
+    name: "Eniola Edun",
+    role: "Co-Founder & Chief Executive Officer",
+    text: "Leads Gamr’s strategy, growth and commercial direction.",
+  },
+  {
+    initials: "DP",
+    name: "Damilola Pedro",
+    role: "Co-Founder & Chief Operating Officer",
+    text: "Leads operations, partnerships, programme delivery and organisational execution.",
+  },
+  {
+    initials: "SF",
+    name: "Seyi Fakoya",
+    role: "Co-Founder & Chief Technology Officer",
+    text: "Leads technology, product development, engineering and the infrastructure behind Gamr’s platforms.",
+  },
+];
+
+const PHOTOS: { src: ImageSrc; alt: string; position: string; caption: string }[] = [
+  {
+    src: img.teamLaunch,
+    alt: "The team in Lab t-shirts at the Lab launch",
+    position: "center 40%",
+    caption: "At the Lab launch, University of Lagos",
+  },
+  { src: img.squad, alt: "The Gamr team together on stage", position: "center 22%", caption: "The Gamr team" },
+];
+
+const MORE: { icon: IconName; title: string; text: string; link: string; href: string }[] = [
+  { icon: "book", title: "Insights", text: "Case studies, articles and game launches.", link: "Read insights →", href: "/insights" },
+  {
+    icon: "mail",
+    title: "Contact",
+    text: "Tell us what you need; we’ll route it to the right team.",
+    link: "Contact us →",
+    href: "/contact",
+  },
+];
 
 export default function CompanyPage() {
   return (
     <PageShell active="company">
-<section className="bg-grid relative overflow-hidden bg-black"><HeroImage src={img.labTalk} alt="" className="md:w-[56%]" position="35% 40%" /><div className="md:min-h-[600px] md:pt-[72px] md:pb-[72px] pt-10 pb-14 px-[clamp(20px,5cqw,80px)] mx-auto gap-7 relative max-w-[1280px] box-border flex flex-col justify-end"><div className="flex-[1_1_40px]" /><Eyebrow>Company · About</Eyebrow><h1 className="m-0 text-[length:clamp(42px,7.4cqw,108px)] leading-[0.92] font-black tracking-[-0.045em] uppercase text-white">An African<br /><span className="text-transparent [-webkit-text-stroke:2px_#FFFFFF]">games company.</span></h1><p className="m-0 max-w-[600px] text-[19px] leading-[1.6] text-soft">Original games, selective publishing, game-making talent and credible brand participation in gaming.</p><div className="*:flex-[1_1_100%] md:*:flex-[0_1_auto] gap-3 flex flex-wrap"><Button href="/games" variant="primary">Explore Our Games</Button><Button href="/contact" variant="ghost">Contact Gamr</Button></div></div></section>
-<Section><div className="gap-y-6 gap-x-16 flex flex-wrap items-end justify-between"><div className="gap-5 flex-[1_1_560px] flex flex-col"><Eyebrow>Why now</Eyebrow><h2 className="m-0 text-[length:clamp(32px,4.6cqw,66px)] leading-[0.96] font-extrabold tracking-[-0.04em] uppercase text-white">Africa’s gaming moment has arrived.</h2></div><div className="flex-[1_1_360px] max-w-[460px]"><p className="m-0 max-w-[460px] text-[17px] leading-[1.6] text-soft">A young population, rising smartphone access, digital payments and creator culture put Africa among the most important gaming markets of the next decade.</p></div></div></Section>
-<Section tone="alt"><SectionHeading eyebrow="How the company fits together" title="One company, four parts." /><div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 grid"><Card><IconBox name="gamepad" /><CardTitle>Games</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Original games from Gamr Studios.</p><div className="pt-1.5 mt-[auto]"><TextLink href="/games">Games →</TextLink></div></Card><Card><IconBox name="rocket" /><CardTitle>Publishing</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">A selective publishing route for African studios.</p><div className="pt-1.5 mt-[auto]"><TextLink href="/publishing">Publishing →</TextLink></div></Card><Card><IconBox name="book" /><CardTitle>Lab</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">The talent and developer pipeline.</p><div className="pt-1.5 mt-[auto]"><TextLink href="/lab">Lab →</TextLink></div></Card><Card><IconBox name="target" /><CardTitle>Managed Services</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">The commercial offer for brands and agencies.</p><div className="pt-1.5 mt-[auto]"><TextLink href="/for-brands">For Brands →</TextLink></div></Card></div></Section>
-<Section><SectionHeading eyebrow="Leadership and team" title="The people behind the games." /><div className="grid-cols-1 md:grid-cols-3 gap-4 grid"><div className="p-7 border border-line gap-3 bg-surface flex flex-col"><div className="mb-2 border-2 border-blue-text w-[72px] h-[72px] flex items-center justify-center text-[26px] font-black tracking-[-0.02em] text-white" aria-hidden="true">EE</div><CardTitle size={24}>Eniola Edun</CardTitle><Mono tone="blue">Co-Founder & Chief Executive Officer</Mono><p className="m-0 max-w-[420px] text-[15px] leading-[1.6] text-muted">Leads Gamr’s strategy, growth and commercial direction.</p></div><div className="p-7 border border-line gap-3 bg-surface flex flex-col"><div className="mb-2 border-2 border-blue-text w-[72px] h-[72px] flex items-center justify-center text-[26px] font-black tracking-[-0.02em] text-white" aria-hidden="true">DP</div><CardTitle size={24}>Damilola Pedro</CardTitle><Mono tone="blue">Co-Founder & Chief Operating Officer</Mono><p className="m-0 max-w-[420px] text-[15px] leading-[1.6] text-muted">Leads operations, partnerships, programme delivery and organisational execution.</p></div><div className="p-7 border border-line gap-3 bg-surface flex flex-col"><div className="mb-2 border-2 border-blue-text w-[72px] h-[72px] flex items-center justify-center text-[26px] font-black tracking-[-0.02em] text-white" aria-hidden="true">SF</div><CardTitle size={24}>Seyi Fakoya</CardTitle><Mono tone="blue">Co-Founder & Chief Technology Officer</Mono><p className="m-0 max-w-[420px] text-[15px] leading-[1.6] text-muted">Leads technology, product development, engineering and the infrastructure behind Gamr’s platforms.</p></div></div><div className="mt-4"><Mono size={10}>Individual portraits to follow</Mono></div><div className="grid-cols-1 md:grid-cols-2 mt-8 gap-4 grid"><figure className="m-0 gap-3 flex flex-col"><ImageBlock src={img.teamLaunch} alt="The team in Lab t-shirts at the Lab launch" className="md:h-[420px] border border-line" position="center 40%" /><figcaption><Mono>At the Lab launch, University of Lagos</Mono></figcaption></figure><figure className="m-0 gap-3 flex flex-col"><ImageBlock src={img.squad} alt="The Gamr team together on stage" className="md:h-[420px] border border-line" position="center 22%" /><figcaption><Mono>The Gamr team</Mono></figcaption></figure></div></Section>
-<Section tone="alt" id="careers"><div className="gap-y-8 gap-x-16 flex flex-wrap items-end justify-between"><div className="gap-5 flex-[1_1_480px] flex flex-col"><Eyebrow>Careers</Eyebrow><h2 className="m-0 text-[length:clamp(32px,4.6cqw,66px)] leading-[0.96] font-extrabold tracking-[-0.04em] uppercase text-white">Build games with us.</h2><p className="m-0 max-w-[560px] text-[16px] leading-[1.6] text-muted">We hire across game development, art, production and programmes. Choose “Careers” on the contact form and we’ll reach out when a role fits.</p></div><Button href="/contact" variant="primary">Get in Touch</Button></div></Section>
-<Section><div className="mb-8 gap-y-6 gap-x-16 flex flex-wrap items-end justify-between"><div className="gap-5 flex-[1_1_520px] flex flex-col"><Eyebrow>More from Company</Eyebrow><h2 className="m-0 text-[length:clamp(32px,4.6cqw,66px)] leading-[0.96] font-extrabold tracking-[-0.04em] uppercase text-white">Insights and contact.</h2></div></div><div className="gap-4 flex flex-wrap"><Link className="p-8 border border-line gap-5 flex-[1_1_320px] flex items-start bg-surface" href="/insights"><Icon name="book" size={32} className="text-blue-text flex-none block" /><div className="gap-2.5 flex flex-col"><CardTitle size={24}>Insights</CardTitle><p className="m-0 max-w-[420px] text-[15px] leading-[1.6] text-muted">Case studies, articles and game launches.</p><span className="font-mono text-[12px] font-bold tracking-[0.14em] uppercase text-blue-text">Read insights →</span></div></Link><Link className="p-8 border border-line gap-5 flex-[1_1_320px] flex items-start bg-surface" href="/contact"><Icon name="mail" size={32} className="text-blue-text flex-none block" /><div className="gap-2.5 flex flex-col"><CardTitle size={24}>Contact</CardTitle><p className="m-0 max-w-[420px] text-[15px] leading-[1.6] text-muted">Tell us what you need; we’ll route it to the right team.</p><span className="font-mono text-[12px] font-bold tracking-[0.14em] uppercase text-blue-text">Contact us →</span></div></Link></div></Section>
+      <section className="relative overflow-hidden bg-black bg-grid">
+        <HeroImage src={img.labTalk} alt="" className="md:w-[56%]" position="35% 40%" />
+        <div className="relative mx-auto box-border flex max-w-[1280px] flex-col justify-end gap-7 px-[clamp(20px,5cqw,80px)] pt-10 pb-14 md:min-h-[600px] md:pt-[72px] md:pb-[72px]">
+          <div className="flex-[1_1_40px]" />
+          <Eyebrow>Company · About</Eyebrow>
+          <HeroTitle line1="An African" line2="games company." />
+          <HeroLead>Original games, selective publishing, game-making talent and credible brand participation in gaming.</HeroLead>
+          <ButtonGroup>
+            <Button href="/games">Explore Our Games</Button>
+            <Button href="/contact" variant="ghost">
+              Contact Gamr
+            </Button>
+          </ButtonGroup>
+        </div>
+      </section>
+
+      <Section>
+        <div className="flex flex-wrap items-end justify-between gap-x-16 gap-y-6">
+          <div className="flex flex-[1_1_560px] flex-col gap-5">
+            <Eyebrow>Why now</Eyebrow>
+            <H2>Africa’s gaming moment has arrived.</H2>
+          </div>
+          <div className="max-w-[460px] flex-[1_1_360px]">
+            <p className="m-0 max-w-[460px] text-[17px] leading-[1.6] text-soft">
+              A young population, rising smartphone access, digital payments and creator culture put Africa among the most important gaming
+              markets of the next decade.
+            </p>
+          </div>
+        </div>
+      </Section>
+
+      <Section tone="alt">
+        <SectionHeading eyebrow="How the company fits together" title="One company, four parts." />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {PARTS.map((p) => (
+            <Card key={p.title}>
+              <IconBox name={p.icon} />
+              <CardTitle>{p.title}</CardTitle>
+              <p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">{p.text}</p>
+              <div className="mt-auto pt-1.5">
+                <TextLink href={p.href}>{p.link}</TextLink>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeading eyebrow="Leadership and team" title="The people behind the games." />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {LEADERS.map((l) => (
+            <div key={l.initials} className="flex flex-col gap-3 border border-line bg-surface p-7">
+              <div
+                aria-hidden="true"
+                className="mb-2 flex h-[72px] w-[72px] items-center justify-center border-2 border-blue-text text-[26px] font-black tracking-[-0.02em] text-white"
+              >
+                {l.initials}
+              </div>
+              <CardTitle size={24}>{l.name}</CardTitle>
+              <Mono tone="blue">{l.role}</Mono>
+              <p className="m-0 max-w-[420px] text-[15px] leading-[1.6] text-muted">{l.text}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-4">
+          <Mono size={10}>Individual portraits to follow</Mono>
+        </div>
+        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+          {PHOTOS.map((p) => (
+            <figure key={p.caption} className="m-0 flex flex-col gap-3">
+              <ImageBlock src={p.src} alt={p.alt} className="border border-line md:h-[420px]" position={p.position} />
+              <figcaption>
+                <Mono>{p.caption}</Mono>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </Section>
+
+      <Section tone="alt" id="careers">
+        <div className="flex flex-wrap items-end justify-between gap-x-16 gap-y-8">
+          <div className="flex flex-[1_1_480px] flex-col gap-5">
+            <Eyebrow>Careers</Eyebrow>
+            <H2>Build games with us.</H2>
+            <Body>
+              We hire across game development, art, production and programmes. Choose “Careers” on the contact form and we’ll reach out when
+              a role fits.
+            </Body>
+          </div>
+          <Button href="/contact">Get in Touch</Button>
+        </div>
+      </Section>
+
+      <Section>
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-x-16 gap-y-6">
+          <div className="flex flex-[1_1_520px] flex-col gap-5">
+            <Eyebrow>More from Company</Eyebrow>
+            <H2>Insights and contact.</H2>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-4">
+          {MORE.map((m) => (
+            <Link key={m.title} className="flex flex-[1_1_320px] items-start gap-5 border border-line bg-surface p-8" href={m.href}>
+              <Icon name={m.icon} size={32} className="block flex-none text-blue-text" />
+              <div className="flex flex-col gap-2.5">
+                <CardTitle size={24}>{m.title}</CardTitle>
+                <p className="m-0 max-w-[420px] text-[15px] leading-[1.6] text-muted">{m.text}</p>
+                <span className="font-mono text-[12px] font-bold tracking-[0.14em] text-blue-text uppercase">{m.link}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </Section>
     </PageShell>
   );
 }

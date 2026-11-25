@@ -1,28 +1,220 @@
+import { BriefForm } from "@/components/forms/BriefForm";
 import { Button } from "@/components/Button";
+import { ButtonGroup } from "@/components/ButtonGroup";
 import { Card } from "@/components/Card";
 import { CardTitle } from "@/components/CardTitle";
 import { Eyebrow } from "@/components/Eyebrow";
+import { H2, HeroLead, HeroTitle } from "@/components/Heading";
 import { HeroImage } from "@/components/HeroImage";
-import { Icon } from "@/components/Icon";
+import { Icon, type IconName } from "@/components/Icon";
 import { IconBox } from "@/components/IconBox";
 import { ImageBlock } from "@/components/ImageBlock";
 import { Mono } from "@/components/Mono";
 import { PageShell } from "@/components/PageShell";
+import { RowList, type Row } from "@/components/RowList";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TextLink } from "@/components/TextLink";
-import { img } from "@/lib/images";
+import { Timeline, type TimelineStep } from "@/components/Timeline";
+import { img, type ImageSrc } from "@/lib/images";
+
+type IconCard = { icon: IconName; title: string; text: string };
+
+const OBJECTIVES: IconCard[] = [
+  { icon: "target", title: "Reach gaming audiences", text: "Meet players where they already spend time, with formats they choose." },
+  { icon: "rocket", title: "Launch products", text: "Introduce something new through play, not interruption." },
+  { icon: "users", title: "Build community", text: "Create participation, not just impressions." },
+  { icon: "gamepad", title: "Create branded play", text: "A game or experience people choose to play." },
+];
+
+const CAPABILITIES: IconCard[] = [
+  { icon: "bulb", title: "Strategy and insight", text: "Gaming strategy and audience understanding for your market." },
+  { icon: "gamepad", title: "Branded games and Roblox experiences", text: "Built by a team that makes its own games." },
+  { icon: "trophy", title: "Esports and tournaments", text: "Competition design, registration and delivery." },
+  { icon: "users", title: "Creators and community", text: "Work with creators and communities players trust." },
+  { icon: "broadcast", title: "Live activations and production", text: "Experiential builds and event production." },
+  { icon: "chart", title: "Measurement and reporting", text: "Results reported against the objectives you set." },
+];
+
+const STEPS: TimelineStep[] = [
+  { icon: "search", title: "Discover", text: "Objective, audience and market.", label: "Brief" },
+  { icon: "layers", title: "Design", text: "Concept and plan." },
+  { icon: "cube", title: "Build", text: "Experience, content or event." },
+  { icon: "rocket", title: "Activate", text: "Launch and run." },
+  { icon: "chart", title: "Measure", text: "Report against the brief.", label: "Report" },
+];
+
+const CASES: { client: string; src: ImageSrc; alt: string; rows: Row[] }[] = [
+  {
+    client: "Spotify",
+    src: img.spotifyCase,
+    alt: "Spotify campaign",
+    rows: [
+      {
+        label: "Objective",
+        value: "Build visibility and affinity with Gen Z and Millennial gamers, and connect music with gaming culture.",
+      },
+      {
+        label: "What Gamr did",
+        value:
+          "A music-and-gaming event at Carven: an FC24 creator showdown, artist and DJ sets, playlist collection and community promotion.",
+      },
+      { label: "Result", value: "400+ guests, 1,000+ playlist entries and 20M+ combined digital impressions." },
+    ],
+  },
+  {
+    client: "Prime Hydration",
+    src: img.caseHero,
+    alt: "Prime Hydration campaign",
+    rows: [
+      { label: "Objective", value: "Introduce Prime to Nigeria and position it with gamers and Gen Z." },
+      {
+        label: "What Gamr did",
+        value: "Turned Carven into a Prime-branded gaming venue with pods, hydration booths, creators, competitions and social content.",
+      },
+      { label: "Result", value: "500+ attendees, 1M+ impressions, 22% average engagement and 1,200+ bottles distributed." },
+    ],
+  },
+];
+
+const WHY: IconCard[] = [
+  { icon: "gamepad", title: "We build games", text: "The same team makes Gamr’s own titles." },
+  { icon: "globe", title: "African gaming context", text: "We work inside the culture we advise on." },
+  { icon: "users", title: "Creators and community", text: "We understand who players listen to." },
+  { icon: "broadcast", title: "Production experience", text: "We have run activations and competitions." },
+];
+
+function CardText({ children }: { children: string }) {
+  return <p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">{children}</p>;
+}
 
 export default function ForBrandsPage() {
   return (
     <PageShell active="brands">
-<section className="bg-grid relative overflow-hidden bg-black"><HeroImage src={img.esports} alt="" className="md:w-[60%]" position="55% 45%" /><div className="md:min-h-[620px] md:pt-[72px] md:pb-[72px] pt-10 pb-14 px-[clamp(20px,5cqw,80px)] mx-auto gap-7 relative max-w-[1280px] box-border flex flex-col justify-end"><div className="flex-[1_1_40px]" /><Eyebrow>For Brands · Managed Services</Eyebrow><h1 className="m-0 text-[length:clamp(42px,7.4cqw,108px)] leading-[0.92] font-black tracking-[-0.045em] uppercase text-white">Help your brand show up,<br /><span className="text-transparent [-webkit-text-stroke:2px_#FFFFFF]">and belong, in gaming.</span></h1><p className="m-0 max-w-[600px] text-[19px] leading-[1.6] text-soft">Strategy, playable experiences, creators, esports and live activation, from a team that builds its own games.</p><div className="*:flex-[1_1_100%] md:*:flex-[0_1_auto] gap-3 flex flex-wrap"><Button href="/for-brands#brief" variant="primary">Brief Us</Button><Button href="/for-brands#work" variant="ghost">View Case Studies</Button></div></div></section>
-<Section><SectionHeading eyebrow="Start from your objective" title="What do you need gaming to do?" /><div className="grid-cols-1 md:grid-cols-2 gap-4 grid"><div className="p-9 border border-line gap-6 bg-surface flex items-start"><div className="border border-line-strong w-16 h-16 flex-[0_0_64px] flex items-center justify-center"><Icon name="target" size={34} className="text-blue-text flex-none block" /></div><div className="gap-3 flex flex-col"><CardTitle size={26}>Reach gaming audiences</CardTitle><p className="m-0 max-w-[420px] text-[16px] leading-[1.6] text-muted">Meet players where they already spend time, with formats they choose.</p><div><Button href="/for-brands#brief" variant="ghost" size="sm">Learn More</Button></div></div></div><div className="p-9 border border-line gap-6 bg-surface flex items-start"><div className="border border-line-strong w-16 h-16 flex-[0_0_64px] flex items-center justify-center"><Icon name="rocket" size={34} className="text-blue-text flex-none block" /></div><div className="gap-3 flex flex-col"><CardTitle size={26}>Launch products</CardTitle><p className="m-0 max-w-[420px] text-[16px] leading-[1.6] text-muted">Introduce something new through play, not interruption.</p><div><Button href="/for-brands#brief" variant="ghost" size="sm">Learn More</Button></div></div></div><div className="p-9 border border-line gap-6 bg-surface flex items-start"><div className="border border-line-strong w-16 h-16 flex-[0_0_64px] flex items-center justify-center"><Icon name="users" size={34} className="text-blue-text flex-none block" /></div><div className="gap-3 flex flex-col"><CardTitle size={26}>Build community</CardTitle><p className="m-0 max-w-[420px] text-[16px] leading-[1.6] text-muted">Create participation, not just impressions.</p><div><Button href="/for-brands#brief" variant="ghost" size="sm">Learn More</Button></div></div></div><div className="p-9 border border-line gap-6 bg-surface flex items-start"><div className="border border-line-strong w-16 h-16 flex-[0_0_64px] flex items-center justify-center"><Icon name="gamepad" size={34} className="text-blue-text flex-none block" /></div><div className="gap-3 flex flex-col"><CardTitle size={26}>Create branded play</CardTitle><p className="m-0 max-w-[420px] text-[16px] leading-[1.6] text-muted">A game or experience people choose to play.</p><div><Button href="/for-brands#brief" variant="ghost" size="sm">Learn More</Button></div></div></div></div></Section>
-<Section tone="alt"><SectionHeading eyebrow="Capabilities" title="What Gamr delivers." /><div className="grid-cols-1 md:grid-cols-3 gap-4 grid"><Card><IconBox name="bulb" /><CardTitle>Strategy and insight</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Gaming strategy and audience understanding for your market.</p></Card><Card><IconBox name="gamepad" /><CardTitle>Branded games and Roblox experiences</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Built by a team that makes its own games.</p></Card><Card><IconBox name="trophy" /><CardTitle>Esports and tournaments</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Competition design, registration and delivery.</p></Card><Card><IconBox name="users" /><CardTitle>Creators and community</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Work with creators and communities players trust.</p></Card><Card><IconBox name="broadcast" /><CardTitle>Live activations and production</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Experiential builds and event production.</p></Card><Card><IconBox name="chart" /><CardTitle>Measurement and reporting</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Results reported against the objectives you set.</p></Card></div><div className="p-10 mt-12 border border-line gap-5 bg-surface flex flex-col items-center text-center"><CardTitle size={30}>Have a brief in mind?</CardTitle><p className="m-0 max-w-[520px] text-[16px] leading-[1.6] text-muted">Tell us the objective. We’ll come back with the right mix.</p><div className="*:flex-[1_1_100%] md:*:flex-[0_1_auto] gap-3 flex flex-wrap"><Button href="/for-brands#brief" variant="primary">Brief Us</Button><Button href="/contact" variant="ghost">Work With Us</Button></div></div></Section>
-<Section><SectionHeading eyebrow="How Gamr works" title="Five steps, one team." /><div className="px-8 py-10 border border-line bg-surface"><ol className="grid-cols-1 md:grid-cols-2 lg:grid-cols-5 KEEP_tl p-0 m-0 gap-4 list-none grid"><li className="pr-3 gap-3.5 relative flex flex-col"><div className="h-4"><Mono size={10}>Brief</Mono></div><div className="relative h-12"><div className="absolute top-[23px] left-12 -right-4 h-0.5 bg-line-strong" aria-hidden="true" /><div className="border-2 border-blue-text relative w-12 h-12 box-border bg-black flex items-center justify-center"><Icon name="search" size={24} className="text-blue-text flex-none block" /></div></div><Mono tone="blue">01</Mono><div className="text-[17px] leading-[1.25] font-bold uppercase text-white">Discover</div><p className="m-0 max-w-[260px] text-[14px] leading-[1.6] text-muted">Objective, audience and market.</p></li><li className="pr-3 gap-3.5 relative flex flex-col"><div className="h-4"><span className="font-mono text-[10px] font-bold tracking-[0.16em] uppercase text-muted" /></div><div className="relative h-12"><div className="absolute top-[23px] left-12 -right-4 h-0.5 bg-line-strong" aria-hidden="true" /><div className="border-2 border-blue-text relative w-12 h-12 box-border bg-black flex items-center justify-center"><Icon name="layers" size={24} className="text-blue-text flex-none block" /></div></div><Mono tone="blue">02</Mono><div className="text-[17px] leading-[1.25] font-bold uppercase text-white">Design</div><p className="m-0 max-w-[260px] text-[14px] leading-[1.6] text-muted">Concept and plan.</p></li><li className="pr-3 gap-3.5 relative flex flex-col"><div className="h-4"><span className="font-mono text-[10px] font-bold tracking-[0.16em] uppercase text-muted" /></div><div className="relative h-12"><div className="absolute top-[23px] left-12 -right-4 h-0.5 bg-line-strong" aria-hidden="true" /><div className="border-2 border-blue-text relative w-12 h-12 box-border bg-black flex items-center justify-center"><Icon name="cube" size={24} className="text-blue-text flex-none block" /></div></div><Mono tone="blue">03</Mono><div className="text-[17px] leading-[1.25] font-bold uppercase text-white">Build</div><p className="m-0 max-w-[260px] text-[14px] leading-[1.6] text-muted">Experience, content or event.</p></li><li className="pr-3 gap-3.5 relative flex flex-col"><div className="h-4"><span className="font-mono text-[10px] font-bold tracking-[0.16em] uppercase text-muted" /></div><div className="relative h-12"><div className="absolute top-[23px] left-12 -right-4 h-0.5 bg-line-strong" aria-hidden="true" /><div className="border-2 border-blue-text relative w-12 h-12 box-border bg-black flex items-center justify-center"><Icon name="rocket" size={24} className="text-blue-text flex-none block" /></div></div><Mono tone="blue">04</Mono><div className="text-[17px] leading-[1.25] font-bold uppercase text-white">Activate</div><p className="m-0 max-w-[260px] text-[14px] leading-[1.6] text-muted">Launch and run.</p></li><li className="pr-3 gap-3.5 relative flex flex-col"><div className="h-4"><Mono size={10}>Report</Mono></div><div className="relative h-12"><div className="absolute top-[23px] left-12 -right-4 h-0.5 bg-transparent" aria-hidden="true" /><div className="border-2 border-blue relative w-12 h-12 box-border bg-blue flex items-center justify-center"><Icon name="chart" size={24} className="text-white flex-none block" /></div></div><Mono tone="blue">05</Mono><div className="text-[17px] leading-[1.25] font-bold uppercase text-white">Measure</div><p className="m-0 max-w-[260px] text-[14px] leading-[1.6] text-muted">Report against the brief.</p></li></ol></div></Section>
-<Section tone="alt" id="work"><SectionHeading eyebrow="Selected work" title="Show the brief. Show the role. Show the result." lead="Recent projects, each with the client, date, objective, what Gamr did and the result." /><div className="grid-cols-1 md:grid-cols-2 gap-4 grid"><article className="border border-line bg-surface flex flex-col"><ImageBlock src={img.spotifyCase} alt="Spotify campaign" className="md:h-[260px] border-b border-line" /><div className="p-7 gap-4 flex flex-col"><Mono tone="blue">Client project · 2024</Mono><CardTitle size={28}>Spotify</CardTitle><div className="border-b border-line"><div className="px-0 py-3.5 border-t border-line gap-y-1 gap-x-6 flex flex-wrap"><div className="flex-[0_0_150px]"><Mono>Objective</Mono></div><div className="flex-[1_1_200px] text-[15px] leading-[1.5] text-white">Build visibility and affinity with Gen Z and Millennial gamers, and connect music with gaming culture.</div></div><div className="px-0 py-3.5 border-t border-line gap-y-1 gap-x-6 flex flex-wrap"><div className="flex-[0_0_150px]"><Mono>What Gamr did</Mono></div><div className="flex-[1_1_200px] text-[15px] leading-[1.5] text-white">A music-and-gaming event at Carven: an FC24 creator showdown, artist and DJ sets, playlist collection and community promotion.</div></div><div className="px-0 py-3.5 border-t border-line gap-y-1 gap-x-6 flex flex-wrap"><div className="flex-[0_0_150px]"><Mono>Result</Mono></div><div className="flex-[1_1_200px] text-[15px] leading-[1.5] text-white">400+ guests, 1,000+ playlist entries and 20M+ combined digital impressions.</div></div></div><Mono size={10}>Results as published by Gamr</Mono><div><TextLink href="/insights">Read the case study →</TextLink></div></div></article><article className="border border-line bg-surface flex flex-col"><ImageBlock src={img.caseHero} alt="Prime Hydration campaign" className="md:h-[260px] border-b border-line" /><div className="p-7 gap-4 flex flex-col"><Mono tone="blue">Client project · 2024</Mono><CardTitle size={28}>Prime Hydration</CardTitle><div className="border-b border-line"><div className="px-0 py-3.5 border-t border-line gap-y-1 gap-x-6 flex flex-wrap"><div className="flex-[0_0_150px]"><Mono>Objective</Mono></div><div className="flex-[1_1_200px] text-[15px] leading-[1.5] text-white">Introduce Prime to Nigeria and position it with gamers and Gen Z.</div></div><div className="px-0 py-3.5 border-t border-line gap-y-1 gap-x-6 flex flex-wrap"><div className="flex-[0_0_150px]"><Mono>What Gamr did</Mono></div><div className="flex-[1_1_200px] text-[15px] leading-[1.5] text-white">Turned Carven into a Prime-branded gaming venue with pods, hydration booths, creators, competitions and social content.</div></div><div className="px-0 py-3.5 border-t border-line gap-y-1 gap-x-6 flex flex-wrap"><div className="flex-[0_0_150px]"><Mono>Result</Mono></div><div className="flex-[1_1_200px] text-[15px] leading-[1.5] text-white">500+ attendees, 1M+ impressions, 22% average engagement and 1,200+ bottles distributed.</div></div></div><Mono size={10}>Results as published by Gamr</Mono><div><TextLink href="/insights">Read the case study →</TextLink></div></div></article></div><div className="mt-7"><TextLink href="/insights">View all case studies →</TextLink></div></Section>
-<Section><SectionHeading eyebrow="Why Gamr" title="A games company first." /><div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 grid"><Card><IconBox name="gamepad" /><CardTitle>We build games</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">The same team makes Gamr’s own titles.</p></Card><Card><IconBox name="globe" /><CardTitle>African gaming context</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">We work inside the culture we advise on.</p></Card><Card><IconBox name="users" /><CardTitle>Creators and community</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">We understand who players listen to.</p></Card><Card><IconBox name="broadcast" /><CardTitle>Production experience</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">We have run activations and competitions.</p></Card></div></Section>
-<Section tone="alt" id="brief" className="gap-y-10 gap-x-[72px] flex flex-wrap"><div className="gap-5 flex-[1_1_320px] flex flex-col"><Eyebrow>Brief us</Eyebrow><h2 className="m-0 text-[length:clamp(32px,4.6cqw,66px)] leading-[0.96] font-extrabold tracking-[-0.04em] uppercase text-white">Tell us what you need.</h2><p className="m-0 max-w-[380px] text-[16px] leading-[1.6] text-muted">Every call to action on this page lands here. Your brief is routed automatically to the right team, not a shared inbox.</p><div className="px-4 py-3.5 border border-line-strong gap-3 flex items-center"><Icon name="arrowCircle" size={22} className="text-blue-text flex-none block" /><span className="text-[14px] text-soft">Routed by intent: brand briefs, sponsorships and Lab partnerships each reach their owner.</span></div></div><form className="gap-5 flex-[1.6_1_520px] flex flex-wrap"><div className="gap-2 flex-[1_1_100%] flex flex-col"><label className="font-mono text-[12px] font-bold tracking-[0.14em] uppercase text-soft" htmlFor="b0">What’s this about?</label><select className="px-3.5 py-3 border border-line-strong w-full box-border min-h-13 bg-field text-white font-sans text-[16px] rounded-none" id="b0"><option>Brand brief</option><option>Sponsorship</option><option>Lab partnership</option><option>Something else</option></select></div><div className="gap-2 flex-[1_1_280px] flex flex-col"><label className="font-mono text-[12px] font-bold tracking-[0.14em] uppercase text-soft" htmlFor="b1">Company or agency</label><input className="px-3.5 py-3 border border-line-strong w-full box-border min-h-13 bg-field text-white font-sans text-[16px] rounded-none" id="b1" type="text" /></div><div className="gap-2 flex-[1_1_280px] flex flex-col"><label className="font-mono text-[12px] font-bold tracking-[0.14em] uppercase text-soft" htmlFor="b2">Your name</label><input className="px-3.5 py-3 border border-line-strong w-full box-border min-h-13 bg-field text-white font-sans text-[16px] rounded-none" id="b2" type="text" /></div><div className="gap-2 flex-[1_1_280px] flex flex-col"><label className="font-mono text-[12px] font-bold tracking-[0.14em] uppercase text-soft" htmlFor="b3">Email</label><input className="px-3.5 py-3 border border-line-strong w-full box-border min-h-13 bg-field text-white font-sans text-[16px] rounded-none" id="b3" type="email" /></div><div className="gap-2 flex-[1_1_280px] flex flex-col"><label className="font-mono text-[12px] font-bold tracking-[0.14em] uppercase text-soft" htmlFor="b4">Phone</label><input className="px-3.5 py-3 border border-line-strong w-full box-border min-h-13 bg-field text-white font-sans text-[16px] rounded-none" id="b4" type="tel" /></div><div className="gap-2 flex-[1_1_100%] flex flex-col"><label className="font-mono text-[12px] font-bold tracking-[0.14em] uppercase text-soft" htmlFor="b5">Objective</label><textarea className="px-3.5 py-3 border border-line-strong w-full box-border min-h-13 bg-field text-white font-sans text-[16px] rounded-none [resize:vertical]" id="b5" rows="4" /></div><div className="gap-2 flex-[1_1_280px] flex flex-col"><label className="font-mono text-[12px] font-bold tracking-[0.14em] uppercase text-soft" htmlFor="b6">Audience and market</label><input className="px-3.5 py-3 border border-line-strong w-full box-border min-h-13 bg-field text-white font-sans text-[16px] rounded-none" id="b6" type="text" /></div><div className="gap-2 flex-[1_1_280px] flex flex-col"><label className="font-mono text-[12px] font-bold tracking-[0.14em] uppercase text-soft" htmlFor="b7">Required capability</label><select className="px-3.5 py-3 border border-line-strong w-full box-border min-h-13 bg-field text-white font-sans text-[16px] rounded-none" id="b7"><option>Strategy and insight</option><option>Branded game or Roblox experience</option><option>Esports and tournaments</option><option>Creators and community</option><option>Live activation</option><option>Not sure yet</option></select></div><div className="gap-2 flex-[1_1_280px] flex flex-col"><label className="font-mono text-[12px] font-bold tracking-[0.14em] uppercase text-soft" htmlFor="b8">Timing</label><input className="px-3.5 py-3 border border-line-strong w-full box-border min-h-13 bg-field text-white font-sans text-[16px] rounded-none" id="b8" type="text" /></div><div className="gap-2 flex-[1_1_280px] flex flex-col"><label className="font-mono text-[12px] font-bold tracking-[0.14em] uppercase text-soft" htmlFor="b9">Budget range</label><select className="px-3.5 py-3 border border-line-strong w-full box-border min-h-13 bg-field text-white font-sans text-[16px] rounded-none" id="b9"><option>Under ₦5m</option><option>₦5m – ₦20m</option><option>₦20m – ₦50m</option><option>Above ₦50m</option><option>Not sure yet</option></select></div><div className="gap-2 flex-[1_1_100%] flex flex-col"><label className="font-mono text-[12px] font-bold tracking-[0.14em] uppercase text-soft" htmlFor="b10">Existing brief (upload)</label><input className="px-3.5 py-3 border border-line-strong w-full box-border min-h-13 bg-field text-white font-sans text-[16px] rounded-none" id="b10" type="file" /></div><div className="gap-2 flex-[1_1_100%] flex flex-col"><label className="font-mono text-[12px] font-bold tracking-[0.14em] uppercase text-soft" htmlFor="b11">How will you measure success?</label><input className="px-3.5 py-3 border border-line-strong w-full box-border min-h-13 bg-field text-white font-sans text-[16px] rounded-none" id="b11" type="text" /></div><div className="gap-3 flex-[1_1_100%] flex items-center"><input className="w-5.5 h-5.5 [accent-color:#2563EB]" id="b12" type="checkbox" /><label className="text-[14px] text-soft" htmlFor="b12">I agree to the privacy policy.</label></div><div className="flex-[1_1_100%]"><button className="px-9 py-0 border-2 border-blue bg-blue text-white min-h-14 font-sans text-[13px] font-bold tracking-[0.14em] uppercase rounded-none cursor-pointer" type="button">Send Brief</button></div></form></Section>
+      <section className="relative overflow-hidden bg-black bg-grid">
+        <HeroImage src={img.esports} alt="" className="md:w-[60%]" position="55% 45%" />
+        <div className="relative mx-auto box-border flex max-w-[1280px] flex-col justify-end gap-7 px-[clamp(20px,5cqw,80px)] pt-10 pb-14 md:min-h-[620px] md:pt-[72px] md:pb-[72px]">
+          <div className="flex-[1_1_40px]" />
+          <Eyebrow>For Brands · Managed Services</Eyebrow>
+          <HeroTitle line1="Help your brand show up," line2="and belong, in gaming." />
+          <HeroLead>Strategy, playable experiences, creators, esports and live activation, from a team that builds its own games.</HeroLead>
+          <ButtonGroup>
+            <Button href="/for-brands#brief">Brief Us</Button>
+            <Button href="/for-brands#work" variant="ghost">
+              View Case Studies
+            </Button>
+          </ButtonGroup>
+        </div>
+      </section>
+
+      <Section>
+        <SectionHeading eyebrow="Start from your objective" title="What do you need gaming to do?" />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {OBJECTIVES.map((o) => (
+            <div key={o.title} className="flex items-start gap-6 border border-line bg-surface p-9">
+              <div className="flex h-16 w-16 flex-[0_0_64px] items-center justify-center border border-line-strong">
+                <Icon name={o.icon} size={34} className="block flex-none text-blue-text" />
+              </div>
+              <div className="flex flex-col gap-3">
+                <CardTitle size={26}>{o.title}</CardTitle>
+                <p className="m-0 max-w-[420px] text-[16px] leading-[1.6] text-muted">{o.text}</p>
+                <div>
+                  <Button href="/for-brands#brief" variant="ghost" size="sm">
+                    Learn More
+                  </Button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section tone="alt">
+        <SectionHeading eyebrow="Capabilities" title="What Gamr delivers." />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {CAPABILITIES.map((c) => (
+            <Card key={c.title}>
+              <IconBox name={c.icon} />
+              <CardTitle>{c.title}</CardTitle>
+              <CardText>{c.text}</CardText>
+            </Card>
+          ))}
+        </div>
+        <div className="mt-12 flex flex-col items-center gap-5 border border-line bg-surface p-10 text-center">
+          <CardTitle size={30}>Have a brief in mind?</CardTitle>
+          <p className="m-0 max-w-[520px] text-[16px] leading-[1.6] text-muted">
+            Tell us the objective. We’ll come back with the right mix.
+          </p>
+          <ButtonGroup>
+            <Button href="/for-brands#brief">Brief Us</Button>
+            <Button href="/contact" variant="ghost">
+              Work With Us
+            </Button>
+          </ButtonGroup>
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeading eyebrow="How Gamr works" title="Five steps, one team." />
+        <Timeline steps={STEPS} />
+      </Section>
+
+      <Section tone="alt" id="work">
+        <SectionHeading
+          eyebrow="Selected work"
+          title="Show the brief. Show the role. Show the result."
+          lead="Recent projects, each with the client, date, objective, what Gamr did and the result."
+        />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {CASES.map((c) => (
+            <article key={c.client} className="flex flex-col border border-line bg-surface">
+              <ImageBlock src={c.src} alt={c.alt} className="border-b border-line md:h-[260px]" />
+              <div className="flex flex-col gap-4 p-7">
+                <Mono tone="blue">Client project · 2024</Mono>
+                <CardTitle size={28}>{c.client}</CardTitle>
+                <RowList rows={c.rows} />
+                <Mono size={10}>Results as published by Gamr</Mono>
+                <div>
+                  <TextLink href="/insights">Read the case study →</TextLink>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="mt-7">
+          <TextLink href="/insights">View all case studies →</TextLink>
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeading eyebrow="Why Gamr" title="A games company first." />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {WHY.map((w) => (
+            <Card key={w.title}>
+              <IconBox name={w.icon} />
+              <CardTitle>{w.title}</CardTitle>
+              <CardText>{w.text}</CardText>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section tone="alt" id="brief" className="flex flex-wrap gap-x-[72px] gap-y-10">
+        <div className="flex flex-[1_1_320px] flex-col gap-5">
+          <Eyebrow>Brief us</Eyebrow>
+          <H2>Tell us what you need.</H2>
+          <p className="m-0 max-w-[380px] text-[16px] leading-[1.6] text-muted">
+            Every call to action on this page lands here. Your brief is routed automatically to the right team, not a shared inbox.
+          </p>
+          <div className="flex items-center gap-3 border border-line-strong px-4 py-3.5">
+            <Icon name="arrowCircle" size={22} className="block flex-none text-blue-text" />
+            <span className="text-[14px] text-soft">
+              Routed by intent: brand briefs, sponsorships and Lab partnerships each reach their owner.
+            </span>
+          </div>
+        </div>
+        <BriefForm />
+      </Section>
     </PageShell>
   );
 }

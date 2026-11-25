@@ -1,0 +1,57 @@
+/* Marquee: the list is duplicated, so translating by -50% loops seamlessly. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  animation: marquee 38s linear infinite;
+}
+
+.slate {
+  animation: marquee 46s linear infinite;
+}
+
+.marqueeWrap:hover .marquee,
+.marqueeWrap:hover .slate,
+.marqueeWrap:focus-within .slate,
+.marqueeWrap:focus .slate {
+  animation-play-state: paused;
+}
+
+/* Crossfade: four frames, 5 s apart, 20 s loop, easing in from a slight zoom. */
+@keyframes crossfade {
+  0% {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  6%,
+  25% {
+    opacity: 1;
+  }
+  31%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+.frame {
+  opacity: 0;
+  animation: crossfade 20s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee,
+  .slate,
+  .frame {
+    animation: none;
+  }
+  .frame:first-child {
+    opacity: 1;
+  }
+}

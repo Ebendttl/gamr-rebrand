@@ -1,27 +1,230 @@
-import { Badge } from "@/components/Badge";
-import { Button } from "@/components/Button";
+import { Badge, type BadgeTone } from "@/components/Badge";
+import { Button, type ButtonVariant } from "@/components/Button";
+import { ButtonGroup } from "@/components/ButtonGroup";
 import { Card } from "@/components/Card";
 import { CardTitle } from "@/components/CardTitle";
 import { Eyebrow } from "@/components/Eyebrow";
+import { HeroLead, HeroTitle } from "@/components/Heading";
 import { HeroImage } from "@/components/HeroImage";
+import type { IconName } from "@/components/Icon";
 import { IconBox } from "@/components/IconBox";
 import { ImageBlock } from "@/components/ImageBlock";
 import { Mono } from "@/components/Mono";
 import { PageShell } from "@/components/PageShell";
+import { RowList, type Row } from "@/components/RowList";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
+import { Stat } from "@/components/Stat";
 import { img } from "@/lib/images";
+
+type Feature = { icon: IconName; title: string; text: string };
+
+const STATS = [
+  { value: "1,350+", label: "People trained", source: "Source: gamr.africa homepage, 2026" },
+  { value: "4", label: "Lab partners", source: "French Embassy, NSC, HP, Unreal Engine" },
+  { value: "20.03.25", label: "Lab opened at the University of Lagos", source: "UNILAG Guest Houses, Akoka" },
+];
+
+const APPROACH: Feature[] = [
+  { icon: "book", title: "Practical learning", text: "Learning by building, not by lecture." },
+  { icon: "message", title: "Mentorship", text: "Guidance from people who make games." },
+  { icon: "bolt", title: "Production sprints", text: "Short team sprints that end in something playable." },
+  { icon: "folder", title: "Portfolio projects", text: "Work you can show." },
+  { icon: "briefcase", title: "Industry pathways", text: "Links to real opportunities in games." },
+];
+
+const PROGRAMMES: { tone: BadgeTone; status: string; title: string; rows: Row[]; cta: string; variant: ButtonVariant }[] = [
+  {
+    tone: "live",
+    status: "Applications open",
+    title: "The Lab waitlist",
+    rows: [
+      { label: "Format", value: "Rolling, all year" },
+      { label: "For", value: "Aspiring game developers, designers and artists" },
+      { label: "Closes", value: "Always open" },
+    ],
+    cta: "Join the Waitlist",
+    variant: "primary",
+  },
+  {
+    tone: "dev",
+    status: "Opening soon",
+    title: "Game Development Pathways",
+    rows: [
+      { label: "Format", value: "Unreal Engine, Unity or Godot" },
+      { label: "Tracks", value: "Design, development, art & animation, UI/UX" },
+      { label: "Opens", value: "Next intake to be announced" },
+    ],
+    cta: "Get Notified",
+    variant: "ghost",
+  },
+  {
+    tone: "closed",
+    status: "Applications closed",
+    title: "Build Africa on Roblox",
+    rows: [
+      { label: "Format", value: "2 months: player → builder → creator" },
+      { label: "For", value: "Young Africans, mostly students" },
+      { label: "Next cohort", value: "To be announced" },
+    ],
+    cta: "Join the Waitlist",
+    variant: "ghost",
+  },
+];
+
+const SKILLS: Feature[] = [
+  { icon: "layers", title: "Game design", text: "Core loops, levels and player experience." },
+  { icon: "code", title: "Roblox and Luau", text: "Scripting and building on Roblox." },
+  { icon: "cube", title: "3D worlds", text: "Modelling and environment building." },
+  { icon: "users", title: "Production and teamwork", text: "Shipping as a team, on a schedule." },
+  { icon: "spark", title: "Creative technology", text: "Tools and practice around games." },
+];
+
+const ALUMNI = [
+  "Roblox developer",
+  "Game designer",
+  "3D artist",
+  "UI/UX designer",
+  "Gameplay programmer",
+  "Level designer",
+  "Animator",
+  "Esports producer",
+  "Sound designer",
+  "Narrative designer",
+  "Technical artist",
+  "Community lead",
+];
+
+const PARTNERSHIPS: Feature[] = [
+  { icon: "money", title: "Sponsor a cohort", text: "Fund places on a programme." },
+  { icon: "institution", title: "Host a programme", text: "Bring a Lab programme to your institution." },
+  { icon: "search", title: "Hire talent", text: "Meet graduates who have built and shipped work." },
+];
+
+function FeatureCard({ icon, title, text }: Feature) {
+  return (
+    <Card>
+      <IconBox name={icon} />
+      <CardTitle>{title}</CardTitle>
+      <p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">{text}</p>
+    </Card>
+  );
+}
 
 export default function LabPage() {
   return (
     <PageShell active="lab">
-<section className="bg-grid relative overflow-hidden bg-black"><HeroImage src={img.labDesk} alt="" className="md:w-[60%]" position="62% 45%" /><div className="md:min-h-[600px] md:pt-[72px] md:pb-[72px] pt-10 pb-14 px-[clamp(20px,5cqw,80px)] mx-auto gap-7 relative max-w-[1280px] box-border flex flex-col justify-end"><div className="flex-[1_1_40px]" /><Eyebrow>Lab · by Gamr Studios</Eyebrow><h1 className="m-0 text-[length:clamp(42px,7.4cqw,108px)] leading-[0.92] font-black tracking-[-0.045em] uppercase text-white">Turn players<br /><span className="text-transparent [-webkit-text-stroke:2px_#FFFFFF]">into builders.</span></h1><p className="m-0 max-w-[600px] text-[19px] leading-[1.6] text-soft">Programmes that take people from playing games to building them.</p><div className="*:flex-[1_1_100%] md:*:flex-[0_1_auto] gap-3 flex flex-wrap"><Button href="/lab#programmes" variant="primary">Apply Now</Button><Button href="/lab#partner" variant="ghost">Partner With Us</Button></div></div></section>
-<Section tone="alt"><div className="grid-cols-1 md:grid-cols-3 gap-8 grid"><div className="pt-5 border-t-2 border-blue-text gap-2.5 flex flex-col"><div className="text-[length:clamp(36px,4.4cqw,60px)] leading-[1] font-black tracking-[-0.04em] text-white">1,350+</div><div className="text-[16px] font-bold uppercase text-white">People trained</div><Mono size={10}>Source: gamr.africa homepage, 2026</Mono></div><div className="pt-5 border-t-2 border-blue-text gap-2.5 flex flex-col"><div className="text-[length:clamp(36px,4.4cqw,60px)] leading-[1] font-black tracking-[-0.04em] text-white">4</div><div className="text-[16px] font-bold uppercase text-white">Lab partners</div><Mono size={10}>French Embassy, NSC, HP, Unreal Engine</Mono></div><div className="pt-5 border-t-2 border-blue-text gap-2.5 flex flex-col"><div className="text-[length:clamp(36px,4.4cqw,60px)] leading-[1] font-black tracking-[-0.04em] text-white">20.03.25</div><div className="text-[16px] font-bold uppercase text-white">Lab opened at the University of Lagos</div><Mono size={10}>UNILAG Guest Houses, Akoka</Mono></div></div></Section>
-<Section><SectionHeading eyebrow="What the Lab is" title="A practical route into making games." lead="Gaming PCs, VR stations, motion capture and an esports arena at the University of Lagos." /><div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 grid"><Card><IconBox name="book" /><CardTitle>Practical learning</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Learning by building, not by lecture.</p></Card><Card><IconBox name="message" /><CardTitle>Mentorship</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Guidance from people who make games.</p></Card><Card><IconBox name="bolt" /><CardTitle>Production sprints</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Short team sprints that end in something playable.</p></Card><Card><IconBox name="folder" /><CardTitle>Portfolio projects</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Work you can show.</p></Card><Card><IconBox name="briefcase" /><CardTitle>Industry pathways</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Links to real opportunities in games.</p></Card></div><div className="grid-cols-1 md:grid-cols-2 mt-4 gap-4 grid"><ImageBlock src={img.labTalk} alt="A session at the Lab, with a speaker presenting to guests at the workstations" className="md:h-[380px] border border-line" position="center 45%" /><ImageBlock src={img.labEmpty} alt="The Lab room: rows of workstations in front of a game-themed mural" className="md:h-[380px] border border-line" position="center 55%" /></div></Section>
-<Section tone="alt" id="programmes"><SectionHeading eyebrow="Programmes" title="Open, opening soon and closed." lead="Know exactly when to apply." /><div className="grid-cols-1 md:grid-cols-3 gap-4 grid"><article className="p-7 border border-line gap-4.5 bg-surface flex flex-col"><Badge tone="live">Applications open</Badge><CardTitle size={26}>The Lab waitlist</CardTitle><div className="border-b border-line"><div className="px-0 py-3.5 border-t border-line gap-y-1 gap-x-6 flex flex-wrap"><div className="flex-[0_0_150px]"><Mono>Format</Mono></div><div className="flex-[1_1_200px] text-[15px] leading-[1.5] text-white">Rolling, all year</div></div><div className="px-0 py-3.5 border-t border-line gap-y-1 gap-x-6 flex flex-wrap"><div className="flex-[0_0_150px]"><Mono>For</Mono></div><div className="flex-[1_1_200px] text-[15px] leading-[1.5] text-white">Aspiring game developers, designers and artists</div></div><div className="px-0 py-3.5 border-t border-line gap-y-1 gap-x-6 flex flex-wrap"><div className="flex-[0_0_150px]"><Mono>Closes</Mono></div><div className="flex-[1_1_200px] text-[15px] leading-[1.5] text-white">Always open</div></div></div><div className="mt-[auto]"><Button href="/contact?intent=lab" variant="primary">Join the Waitlist</Button></div></article><article className="p-7 border border-line gap-4.5 bg-surface flex flex-col"><Badge tone="dev">Opening soon</Badge><CardTitle size={26}>Game Development Pathways</CardTitle><div className="border-b border-line"><div className="px-0 py-3.5 border-t border-line gap-y-1 gap-x-6 flex flex-wrap"><div className="flex-[0_0_150px]"><Mono>Format</Mono></div><div className="flex-[1_1_200px] text-[15px] leading-[1.5] text-white">Unreal Engine, Unity or Godot</div></div><div className="px-0 py-3.5 border-t border-line gap-y-1 gap-x-6 flex flex-wrap"><div className="flex-[0_0_150px]"><Mono>Tracks</Mono></div><div className="flex-[1_1_200px] text-[15px] leading-[1.5] text-white">Design, development, art & animation, UI/UX</div></div><div className="px-0 py-3.5 border-t border-line gap-y-1 gap-x-6 flex flex-wrap"><div className="flex-[0_0_150px]"><Mono>Opens</Mono></div><div className="flex-[1_1_200px] text-[15px] leading-[1.5] text-white">Next intake to be announced</div></div></div><div className="mt-[auto]"><Button href="/contact?intent=lab" variant="ghost">Get Notified</Button></div></article><article className="p-7 border border-line gap-4.5 bg-surface flex flex-col"><Badge tone="closed">Applications closed</Badge><CardTitle size={26}>Build Africa on Roblox</CardTitle><div className="border-b border-line"><div className="px-0 py-3.5 border-t border-line gap-y-1 gap-x-6 flex flex-wrap"><div className="flex-[0_0_150px]"><Mono>Format</Mono></div><div className="flex-[1_1_200px] text-[15px] leading-[1.5] text-white">2 months: player → builder → creator</div></div><div className="px-0 py-3.5 border-t border-line gap-y-1 gap-x-6 flex flex-wrap"><div className="flex-[0_0_150px]"><Mono>For</Mono></div><div className="flex-[1_1_200px] text-[15px] leading-[1.5] text-white">Young Africans, mostly students</div></div><div className="px-0 py-3.5 border-t border-line gap-y-1 gap-x-6 flex flex-wrap"><div className="flex-[0_0_150px]"><Mono>Next cohort</Mono></div><div className="flex-[1_1_200px] text-[15px] leading-[1.5] text-white">To be announced</div></div></div><div className="mt-[auto]"><Button href="/contact?intent=lab" variant="ghost">Join the Waitlist</Button></div></article></div></Section>
-<Section><SectionHeading eyebrow="Skills and pathways" title="What you learn to do." /><div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 grid"><Card><IconBox name="layers" /><CardTitle>Game design</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Core loops, levels and player experience.</p></Card><Card><IconBox name="code" /><CardTitle>Roblox and Luau</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Scripting and building on Roblox.</p></Card><Card><IconBox name="cube" /><CardTitle>3D worlds</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Modelling and environment building.</p></Card><Card><IconBox name="users" /><CardTitle>Production and teamwork</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Shipping as a team, on a schedule.</p></Card><Card><IconBox name="spark" /><CardTitle>Creative technology</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Tools and practice around games.</p></Card></div></Section>
-<Section tone="alt" id="talent"><SectionHeading eyebrow="Talent" title="The alumni library." lead="Graduates, their skills and what they’ve built." /><div className="grid-cols-2 lg:grid-cols-6 gap-3 grid"><div className="border border-line flex flex-col bg-surface"><div className="bg-grid aspect-[1/1] bg-field" aria-hidden="true" /><div className="px-3.5 py-3 gap-1.5 flex flex-col"><Mono size={10} tone="white">Roblox developer</Mono></div></div><div className="border border-line flex flex-col bg-surface"><div className="bg-grid aspect-[1/1] bg-field" aria-hidden="true" /><div className="px-3.5 py-3 gap-1.5 flex flex-col"><Mono size={10} tone="white">Game designer</Mono></div></div><div className="border border-line flex flex-col bg-surface"><div className="bg-grid aspect-[1/1] bg-field" aria-hidden="true" /><div className="px-3.5 py-3 gap-1.5 flex flex-col"><Mono size={10} tone="white">3D artist</Mono></div></div><div className="border border-line flex flex-col bg-surface"><div className="bg-grid aspect-[1/1] bg-field" aria-hidden="true" /><div className="px-3.5 py-3 gap-1.5 flex flex-col"><Mono size={10} tone="white">UI/UX designer</Mono></div></div><div className="border border-line flex flex-col bg-surface"><div className="bg-grid aspect-[1/1] bg-field" aria-hidden="true" /><div className="px-3.5 py-3 gap-1.5 flex flex-col"><Mono size={10} tone="white">Gameplay programmer</Mono></div></div><div className="border border-line flex flex-col bg-surface"><div className="bg-grid aspect-[1/1] bg-field" aria-hidden="true" /><div className="px-3.5 py-3 gap-1.5 flex flex-col"><Mono size={10} tone="white">Level designer</Mono></div></div><div className="border border-line flex flex-col bg-surface"><div className="bg-grid aspect-[1/1] bg-field" aria-hidden="true" /><div className="px-3.5 py-3 gap-1.5 flex flex-col"><Mono size={10} tone="white">Animator</Mono></div></div><div className="border border-line flex flex-col bg-surface"><div className="bg-grid aspect-[1/1] bg-field" aria-hidden="true" /><div className="px-3.5 py-3 gap-1.5 flex flex-col"><Mono size={10} tone="white">Esports producer</Mono></div></div><div className="border border-line flex flex-col bg-surface"><div className="bg-grid aspect-[1/1] bg-field" aria-hidden="true" /><div className="px-3.5 py-3 gap-1.5 flex flex-col"><Mono size={10} tone="white">Sound designer</Mono></div></div><div className="border border-line flex flex-col bg-surface"><div className="bg-grid aspect-[1/1] bg-field" aria-hidden="true" /><div className="px-3.5 py-3 gap-1.5 flex flex-col"><Mono size={10} tone="white">Narrative designer</Mono></div></div><div className="border border-line flex flex-col bg-surface"><div className="bg-grid aspect-[1/1] bg-field" aria-hidden="true" /><div className="px-3.5 py-3 gap-1.5 flex flex-col"><Mono size={10} tone="white">Technical artist</Mono></div></div><div className="border border-line flex flex-col bg-surface"><div className="bg-grid aspect-[1/1] bg-field" aria-hidden="true" /><div className="px-3.5 py-3 gap-1.5 flex flex-col"><Mono size={10} tone="white">Community lead</Mono></div></div></div><div className="mt-7 gap-y-4 gap-x-8 flex flex-wrap items-center justify-between"><p className="m-0 max-w-[620px] text-[14px] leading-[1.6] text-muted">Profiles appear only with each graduate’s consent. Stories are drafted with AI and approved by the graduate before publishing.</p><Button href="/contact?intent=hire" variant="primary">Hire Talent</Button></div></Section>
-<Section id="partner"><SectionHeading eyebrow="Work with the Lab" title="Partner with us." /><div className="grid-cols-1 md:grid-cols-3 gap-4 grid"><Card><IconBox name="money" /><CardTitle>Sponsor a cohort</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Fund places on a programme.</p></Card><Card><IconBox name="institution" /><CardTitle>Host a programme</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Bring a Lab programme to your institution.</p></Card><Card><IconBox name="search" /><CardTitle>Hire talent</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Meet graduates who have built and shipped work.</p></Card></div><div className="mt-8"><Button href="/contact?intent=hire" variant="primary">Hire Talent</Button></div></Section>
+      <section className="relative overflow-hidden bg-black bg-grid">
+        <HeroImage src={img.labDesk} alt="" className="md:w-[60%]" position="62% 45%" />
+        <div className="relative mx-auto box-border flex max-w-[1280px] flex-col justify-end gap-7 px-[clamp(20px,5cqw,80px)] pt-10 pb-14 md:min-h-[600px] md:pt-[72px] md:pb-[72px]">
+          <div className="flex-[1_1_40px]" />
+          <Eyebrow>Lab · by Gamr Studios</Eyebrow>
+          <HeroTitle line1="Turn players" line2="into builders." />
+          <HeroLead>Programmes that take people from playing games to building them.</HeroLead>
+          <ButtonGroup>
+            <Button href="/lab#programmes">Apply Now</Button>
+            <Button href="/lab#partner" variant="ghost">
+              Partner With Us
+            </Button>
+          </ButtonGroup>
+        </div>
+      </section>
+
+      <Section tone="alt">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          {STATS.map((s) => (
+            <Stat key={s.label} {...s} />
+          ))}
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeading
+          eyebrow="What the Lab is"
+          title="A practical route into making games."
+          lead="Gaming PCs, VR stations, motion capture and an esports arena at the University of Lagos."
+        />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
+          {APPROACH.map((f) => (
+            <FeatureCard key={f.title} {...f} />
+          ))}
+        </div>
+        <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <ImageBlock
+            src={img.labTalk}
+            alt="A session at the Lab, with a speaker presenting to guests at the workstations"
+            className="border border-line md:h-[380px]"
+            position="center 45%"
+          />
+          <ImageBlock
+            src={img.labEmpty}
+            alt="The Lab room: rows of workstations in front of a game-themed mural"
+            className="border border-line md:h-[380px]"
+            position="center 55%"
+          />
+        </div>
+      </Section>
+
+      <Section tone="alt" id="programmes">
+        <SectionHeading eyebrow="Programmes" title="Open, opening soon and closed." lead="Know exactly when to apply." />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {PROGRAMMES.map((p) => (
+            <article key={p.title} className="flex flex-col gap-4.5 border border-line bg-surface p-7">
+              <Badge tone={p.tone}>{p.status}</Badge>
+              <CardTitle size={26}>{p.title}</CardTitle>
+              <RowList rows={p.rows} />
+              <div className="mt-auto">
+                <Button href="/contact?intent=lab" variant={p.variant}>
+                  {p.cta}
+                </Button>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeading eyebrow="Skills and pathways" title="What you learn to do." />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
+          {SKILLS.map((f) => (
+            <FeatureCard key={f.title} {...f} />
+          ))}
+        </div>
+      </Section>
+
+      <Section tone="alt" id="talent">
+        <SectionHeading eyebrow="Talent" title="The alumni library." lead="Graduates, their skills and what they’ve built." />
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-6">
+          {ALUMNI.map((role) => (
+            <div key={role} className="flex flex-col border border-line bg-surface">
+              <div className="aspect-[1/1] bg-field bg-grid" aria-hidden="true" />
+              <div className="flex flex-col gap-1.5 px-3.5 py-3">
+                <Mono size={10} tone="white">
+                  {role}
+                </Mono>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-7 flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
+          <p className="m-0 max-w-[620px] text-[14px] leading-[1.6] text-muted">
+            Profiles appear only with each graduate’s consent. Stories are drafted with AI and approved by the graduate before publishing.
+          </p>
+          <Button href="/contact?intent=hire">Hire Talent</Button>
+        </div>
+      </Section>
+
+      <Section id="partner">
+        <SectionHeading eyebrow="Work with the Lab" title="Partner with us." />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {PARTNERSHIPS.map((f) => (
+            <FeatureCard key={f.title} {...f} />
+          ))}
+        </div>
+        <div className="mt-8">
+          <Button href="/contact?intent=hire">Hire Talent</Button>
+        </div>
+      </Section>
     </PageShell>
   );
 }

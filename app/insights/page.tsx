@@ -2,19 +2,104 @@ import Link from "next/link";
 import { Button } from "@/components/Button";
 import { CardTitle } from "@/components/CardTitle";
 import { Eyebrow } from "@/components/Eyebrow";
+import { HeroTitle } from "@/components/Heading";
 import { ImageBlock } from "@/components/ImageBlock";
 import { Mono } from "@/components/Mono";
 import { PageShell } from "@/components/PageShell";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
-import { img } from "@/lib/images";
+import { cn } from "@/lib/cn";
+import { img, type ImageSrc } from "@/lib/images";
+
+const FILTERS = ["All", "Case studies", "Articles", "Game launches", "News"];
+
+const STORIES: { kind: string; title: string; date: string; src: ImageSrc; position?: string }[] = [
+  { kind: "Case study", title: "Spotify × Gamr: where music meets gaming", date: "10 Aug 2026", src: img.spotifyCase },
+  { kind: "Case study", title: "Launching Prime Hydration to Nigeria’s gamers", date: "9 Aug 2026", src: img.caseHero },
+  { kind: "Game launch", title: "My City Life: New York is live on web", date: "Oct 2026", src: img.mcl1 },
+  { kind: "News", title: "The Lab opens at the University of Lagos", date: "Mar 2025", src: img.teamLaunch, position: "center 35%" },
+  { kind: "Article", title: "Inside the Lab: from players to builders", date: "Gamr", src: img.labRoom, position: "center 60%" },
+  { kind: "Game launch", title: "AfroDrive: build a transport empire on Roblox", date: "Gamr", src: img.afro },
+];
 
 export default function InsightsPage() {
   return (
     <PageShell active="company">
-<section className="bg-grid bg-black"><div className="px-[clamp(20px,5cqw,80px)] pt-[96px] pb-16 mx-auto gap-6 max-w-[1280px] box-border flex flex-col"><Eyebrow>Company · Insights</Eyebrow><h1 className="m-0 text-[length:clamp(42px,7.4cqw,108px)] leading-[0.92] font-black tracking-[-0.045em] uppercase text-white">Notes from<br /><span className="text-transparent [-webkit-text-stroke:2px_#FFFFFF]">the build.</span></h1><p className="m-0 max-w-[560px] text-[19px] leading-[1.6] text-soft">Case studies, articles and game launches from across Gamr.</p></div></section>
-<Section><Link className="border border-line flex flex-wrap bg-surface" href="/insights"><div className="flex-[1.4_1_460px]"><ImageBlock src={img.labTalk} alt="A session at the Lab, University of Lagos" className="md:h-[440px]" position="center 45%" /></div><div className="p-[clamp(28px,4cqw,48px)] gap-4.5 flex-[1_1_360px] flex flex-col justify-center"><Mono tone="blue">Featured · Article</Mono><div className="text-[length:clamp(28px,3.4cqw,46px)] leading-[1] font-extrabold tracking-[-0.035em] uppercase text-white">To build games that are African made and globally played</div><p className="m-0 max-w-[420px] text-[16px] leading-[1.6] text-muted">How the Lab at the University of Lagos is turning Nigeria’s players into game builders.</p><Mono>Gamr · Mar 2025</Mono></div></Link></Section>
-<Section tone="alt"><SectionHeading eyebrow="Latest" title="New from Gamr." /><div className="mb-8 gap-2.5 flex flex-wrap" role="group" aria-label="Filter by type"><button className="px-4.5 py-0 border-2 border-white bg-white text-black min-h-11 font-sans text-[13px] font-bold tracking-[0.08em] uppercase rounded-none cursor-pointer" type="button" aria-pressed="true">All</button><button className="px-4.5 py-0 border-2 border-line-strong bg-transparent text-white min-h-11 font-sans text-[13px] font-bold tracking-[0.08em] uppercase rounded-none cursor-pointer" type="button" aria-pressed="false">Case studies</button><button className="px-4.5 py-0 border-2 border-line-strong bg-transparent text-white min-h-11 font-sans text-[13px] font-bold tracking-[0.08em] uppercase rounded-none cursor-pointer" type="button" aria-pressed="false">Articles</button><button className="px-4.5 py-0 border-2 border-line-strong bg-transparent text-white min-h-11 font-sans text-[13px] font-bold tracking-[0.08em] uppercase rounded-none cursor-pointer" type="button" aria-pressed="false">Game launches</button><button className="px-4.5 py-0 border-2 border-line-strong bg-transparent text-white min-h-11 font-sans text-[13px] font-bold tracking-[0.08em] uppercase rounded-none cursor-pointer" type="button" aria-pressed="false">News</button></div><div className="grid-cols-1 md:grid-cols-3 gap-4 grid"><Link className="border border-line flex flex-col bg-surface" href="/insights"><ImageBlock src={img.spotifyCase} alt="Spotify × Gamr: where music meets gaming" className="md:h-[200px] border-b border-line" /><div className="p-6 gap-3 flex flex-col"><Mono tone="blue">Case study</Mono><CardTitle size={20}>Spotify × Gamr: where music meets gaming</CardTitle><Mono>10 Aug 2026</Mono></div></Link><Link className="border border-line flex flex-col bg-surface" href="/insights"><ImageBlock src={img.caseHero} alt="Launching Prime Hydration to Nigeria’s gamers" className="md:h-[200px] border-b border-line" /><div className="p-6 gap-3 flex flex-col"><Mono tone="blue">Case study</Mono><CardTitle size={20}>Launching Prime Hydration to Nigeria’s gamers</CardTitle><Mono>9 Aug 2026</Mono></div></Link><Link className="border border-line flex flex-col bg-surface" href="/insights"><ImageBlock src={img.mcl1} alt="My City Life: New York is live on web" className="md:h-[200px] border-b border-line" /><div className="p-6 gap-3 flex flex-col"><Mono tone="blue">Game launch</Mono><CardTitle size={20}>My City Life: New York is live on web</CardTitle><Mono>Oct 2026</Mono></div></Link><Link className="border border-line flex flex-col bg-surface" href="/insights"><ImageBlock src={img.teamLaunch} alt="The Lab opens at the University of Lagos" className="md:h-[200px] border-b border-line" position="center 35%" /><div className="p-6 gap-3 flex flex-col"><Mono tone="blue">News</Mono><CardTitle size={20}>The Lab opens at the University of Lagos</CardTitle><Mono>Mar 2025</Mono></div></Link><Link className="border border-line flex flex-col bg-surface" href="/insights"><ImageBlock src={img.labRoom} alt="Inside the Lab: from players to builders" className="md:h-[200px] border-b border-line" position="center 60%" /><div className="p-6 gap-3 flex flex-col"><Mono tone="blue">Article</Mono><CardTitle size={20}>Inside the Lab: from players to builders</CardTitle><Mono>Gamr</Mono></div></Link><Link className="border border-line flex flex-col bg-surface" href="/insights"><ImageBlock src={img.afro} alt="AfroDrive: build a transport empire on Roblox" className="md:h-[200px] border-b border-line" /><div className="p-6 gap-3 flex flex-col"><Mono tone="blue">Game launch</Mono><CardTitle size={20}>AfroDrive: build a transport empire on Roblox</CardTitle><Mono>Gamr</Mono></div></Link></div><div className="mt-10 flex justify-center"><Button href="/insights" variant="ghost">Load More</Button></div></Section>
+      <section className="bg-black bg-grid">
+        <div className="mx-auto box-border flex max-w-[1280px] flex-col gap-6 px-[clamp(20px,5cqw,80px)] pt-[96px] pb-16">
+          <Eyebrow>Company · Insights</Eyebrow>
+          <HeroTitle line1="Notes from" line2="the build." />
+          <p className="m-0 max-w-[560px] text-[19px] leading-[1.6] text-soft">
+            Case studies, articles and game launches from across Gamr.
+          </p>
+        </div>
+      </section>
+
+      <Section>
+        <Link className="flex flex-wrap border border-line bg-surface" href="/insights">
+          <div className="flex-[1.4_1_460px]">
+            <ImageBlock
+              src={img.labTalk}
+              alt="A session at the Lab, University of Lagos"
+              sizes="(min-width: 761px) 60vw, 100vw"
+              className="md:h-[440px]"
+              position="center 45%"
+            />
+          </div>
+          <div className="flex flex-[1_1_360px] flex-col justify-center gap-4.5 p-[clamp(28px,4cqw,48px)]">
+            <Mono tone="blue">Featured · Article</Mono>
+            <div className="text-[length:clamp(28px,3.4cqw,46px)] leading-[1] font-extrabold tracking-[-0.035em] text-white uppercase">
+              To build games that are African made and globally played
+            </div>
+            <p className="m-0 max-w-[420px] text-[16px] leading-[1.6] text-muted">
+              How the Lab at the University of Lagos is turning Nigeria’s players into game builders.
+            </p>
+            <Mono>Gamr · Mar 2025</Mono>
+          </div>
+        </Link>
+      </Section>
+
+      <Section tone="alt">
+        <SectionHeading eyebrow="Latest" title="New from Gamr." />
+        <div className="mb-8 flex flex-wrap gap-2.5" role="group" aria-label="Filter by type">
+          {FILTERS.map((f, i) => (
+            <button
+              key={f}
+              type="button"
+              aria-pressed={i === 0}
+              className={cn(
+                "min-h-11 cursor-pointer rounded-none border-2 px-4.5 py-0 font-sans text-[13px] font-bold tracking-[0.08em] uppercase",
+                i === 0 ? "border-white bg-white text-black" : "border-line-strong bg-transparent text-white",
+              )}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {STORIES.map((s) => (
+            <Link key={s.title} className="flex flex-col border border-line bg-surface" href="/insights">
+              <ImageBlock
+                src={s.src}
+                alt={s.title}
+                sizes="(min-width: 761px) 33vw, 100vw"
+                className="border-b border-line md:h-[200px]"
+                position={s.position}
+              />
+              <div className="flex flex-col gap-3 p-6">
+                <Mono tone="blue">{s.kind}</Mono>
+                <CardTitle size={20}>{s.title}</CardTitle>
+                <Mono>{s.date}</Mono>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-10 flex justify-center">
+          <Button href="/insights" variant="ghost">
+            Load More
+          </Button>
+        </div>
+      </Section>
     </PageShell>
   );
 }

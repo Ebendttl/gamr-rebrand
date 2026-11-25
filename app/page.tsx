@@ -1,31 +1,394 @@
 import Link from "next/link";
-import { Badge } from "@/components/Badge";
+import { Badge, type BadgeTone } from "@/components/Badge";
 import { Button } from "@/components/Button";
+import { ButtonGroup } from "@/components/ButtonGroup";
 import { Card } from "@/components/Card";
 import { CardTitle } from "@/components/CardTitle";
+import { DoorPanel } from "@/components/DoorPanel";
 import { Eyebrow } from "@/components/Eyebrow";
-import { Icon } from "@/components/Icon";
+import { Body, H2, HeroLead, HeroTitle } from "@/components/Heading";
+import { HeroVideo } from "@/components/HeroVideo";
+import { Icon, type IconName } from "@/components/Icon";
 import { IconBox } from "@/components/IconBox";
 import { ImageBlock } from "@/components/ImageBlock";
+import { LogoMarquee, type Logo } from "@/components/LogoMarquee";
 import { Mono } from "@/components/Mono";
 import { PageShell } from "@/components/PageShell";
+import { QuoteBlock } from "@/components/QuoteBlock";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
+import { Stat } from "@/components/Stat";
 import { TextLink } from "@/components/TextLink";
-import { img } from "@/lib/images";
+import { img, type ImageSrc } from "@/lib/images";
+
+const LOGOS: Logo[] = [
+  { name: "Google", src: "/assets/logos/google-white.png", width: 94, height: 96, displayHeight: 30, label: "2022 Black Founders Fund" },
+  { name: "Techstars", src: "/assets/logos/techstars-white.png", width: 533, height: 96, displayHeight: 24, label: "2023 accelerator" },
+  { name: "Logitech", src: "/assets/logos/logitech-white.png", width: 320, height: 96, displayHeight: 28, label: "Gamr X 2023 sponsor" },
+  {
+    name: "Ballantine’s",
+    src: "/assets/logos/ballantines-white.png",
+    width: 388,
+    height: 96,
+    displayHeight: 28,
+    label: "Gamr X 2023 sponsor",
+  },
+  { name: "Spotify", src: "/assets/logos/spotify-white.png", width: 257, height: 82, displayHeight: 28, label: "2024 campaign" },
+  { name: "Lenovo", src: "/assets/logos/lenovo-white.png", width: 384, height: 96, displayHeight: 24, label: "Ecosystem partner" },
+  { name: "Carven", src: "/assets/logos/carven-white.png", width: 438, height: 96, displayHeight: 24, label: "Venue partner" },
+  { name: "Nivea", src: "/assets/logos/nivea-white.png", width: 96, height: 96, displayHeight: 34, label: "Brand partner" },
+  { name: "Golden Penny", src: "/assets/logos/goldenpenny-white.png", width: 61, height: 96, displayHeight: 38, label: "Brand partner" },
+];
+
+const PARTS: { icon: IconName; tag: string; title: string; text: string; link: string; href: string }[] = [
+  {
+    icon: "gamepad",
+    tag: "Identity",
+    title: "Games",
+    text: "Original games from Gamr Studios, built for Roblox, mobile, web and other platforms.",
+    link: "Explore our games →",
+    href: "/games",
+  },
+  {
+    icon: "rocket",
+    tag: "Publishing",
+    title: "Publishing",
+    text: "A selective route that helps African studios fund, finish, launch and grow their games.",
+    link: "Our criteria →",
+    href: "/publishing#criteria",
+  },
+  {
+    icon: "book",
+    tag: "Talent pipeline",
+    title: "Lab",
+    text: "Practical programmes that take people from playing games to building them.",
+    link: "Explore the Lab →",
+    href: "/lab",
+  },
+  {
+    icon: "target",
+    tag: "For brands",
+    title: "Managed Services",
+    text: "Strategy, playable experiences, creators, esports and live activation for brands and agencies.",
+    link: "Brief us →",
+    href: "/for-brands#brief",
+  },
+];
+
+const GAMES: {
+  title: string;
+  src: ImageSrc;
+  alt: string;
+  tone: BadgeTone;
+  status: string;
+  text: string;
+  meta: string;
+  cta?: { label: string; href: string };
+}[] = [
+  {
+    title: "AfroDrive",
+    src: img.afro,
+    alt: "AfroDrive gameplay",
+    tone: "live",
+    status: "Live on Roblox",
+    text: "Start your journey as a local bus driver and build your own transport empire across vibrant African-inspired cities.",
+    meta: "A Gamr Original · By Gamr Studios · Illustration",
+    cta: { label: "Play on Roblox", href: "https://www.roblox.com/games/122444818290399" },
+  },
+  {
+    title: "My City Life",
+    src: img.mcl1,
+    alt: "My City Life gameplay",
+    tone: "live",
+    status: "Live on web",
+    text: "A free life sim in a low-poly New York City: hustle, commute, make rent and vote alongside real players.",
+    meta: "A Gamr Original · Web · mycitylife.gg",
+    cta: { label: "Play in Browser", href: "https://mycitylife.gg/" },
+  },
+  {
+    title: "Crossroads: Lagos Stories",
+    src: img.crossroads,
+    alt: "Crossroads: Lagos Stories gameplay",
+    tone: "dev",
+    status: "In development",
+    text: "A narrative game of decision-based storytelling, drawn from the lives of young Nigerians.",
+    meta: "A Gamr Original · Concept illustration · No release date",
+  },
+];
+
+const LANES = [
+  { title: "Gamr Originals", tag: "A Gamr Original", text: "Games initiated and controlled by Gamr, built by Gamr Studios." },
+  {
+    title: "Publishing Partners",
+    tag: "Published by Gamr",
+    text: "Games from independent African studios. Studios normally keep their underlying IP; publishing rights are agreed by platform, territory and term.",
+  },
+  {
+    title: "Co-development",
+    tag: "Developed with Gamr Studios",
+    text: "Games built together, with responsibilities and rights agreed project by project.",
+  },
+];
+
+const SUPPORT: { icon: IconName; title: string; text: string }[] = [
+  { icon: "money", title: "Fund", text: "Milestone funding where approved." },
+  { icon: "checkCircle", title: "Finish", text: "Production support, playtesting and QA coordination." },
+  { icon: "rocket", title: "Launch", text: "Positioning, marketing and store release." },
+  { icon: "trendUp", title: "Grow", text: "Analytics, live operations and lifecycle planning." },
+];
+
+const CAPABILITIES: { icon: IconName; title: string; text: string }[] = [
+  { icon: "bulb", title: "Strategy and insight", text: "Gaming strategy and audience understanding for your market." },
+  { icon: "gamepad", title: "Branded games", text: "Branded games and Roblox experiences." },
+  { icon: "trophy", title: "Esports and tournaments", text: "Tournament and esports operations." },
+  { icon: "users", title: "Creators and community", text: "Creator and community campaigns." },
+  { icon: "broadcast", title: "Live activations", text: "Experiential production and live events." },
+  { icon: "chart", title: "Measurement", text: "Reporting against the objectives you set." },
+];
+
+const STORIES: { kind: string; title: string; date: string; src: ImageSrc }[] = [
+  { kind: "Case study", title: "Spotify × Gamr: where music meets gaming", date: "10 Aug 2026", src: img.spotifyCase },
+  { kind: "Case study", title: "Launching Prime Hydration to Nigeria’s gamers", date: "9 Aug 2026", src: img.caseHero },
+  { kind: "Game launch", title: "My City Life: New York is live on web", date: "Oct 2026", src: img.mcl1 },
+];
 
 export default function HomePage() {
   return (
     <PageShell active="home">
-<section className="bg-grid bg-black"><div className="px-[clamp(20px,5cqw,80px)] py-[72px] mx-auto gap-y-12 gap-x-16 max-w-[1280px] box-border min-h-[760px] flex flex-wrap items-center"><div className="gap-7 flex-[1_1_560px] flex flex-col"><Eyebrow>Gamr Games & Publishing</Eyebrow><h1 className="m-0 text-[length:clamp(42px,7.4cqw,108px)] leading-[0.92] font-black tracking-[-0.045em] uppercase text-white">Games from Africa.<br /><span className="text-transparent [-webkit-text-stroke:2px_#FFFFFF]">Played everywhere.</span></h1><p className="m-0 max-w-[600px] text-[19px] leading-[1.6] text-soft">Gamr creates original games and selectively partners with African studios to fund, finish, launch and grow distinctive titles.</p><div className="*:flex-[1_1_100%] md:*:flex-[0_1_auto] gap-3 flex flex-wrap"><Button href="/games" variant="primary">Explore Our Games</Button><Button href="/publishing#pitch" variant="ghost">Pitch a Game</Button></div><div><TextLink href="/for-brands#brief">Building for a brand? Brief Us →</TextLink></div></div><figure className="KEEP_hvid m-0 gap-3.5 flex-[0_0_300px] flex flex-col"><div className="border-2 border-line-strong w-[300px] aspect-[368/656] bg-white overflow-hidden"><video className="block w-full h-full object-cover" src="TODO" autoPlay muted loop playsInline aria-label="Gamr Studios introduces Build Africa on Roblox" /></div><figcaption><Mono size={10}>Gamr Studios · Build Africa on Roblox</Mono></figcaption></figure></div></section><section className="border-t border-line bg-black" aria-label="Trusted by industry leaders"><div className="px-[clamp(20px,5cqw,80px)] py-10 mx-auto gap-y-6 gap-x-12 max-w-[1280px] box-border flex flex-wrap items-center"><div className="flex-none"><Mono>Trusted by industry leaders</Mono></div><div className="KEEP_marqwrap flex-[1_1_600px] overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)] [-webkit-mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]"><ul className="KEEP_marq p-0 m-0 list-none flex w-max"><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center"><div className="h-8.5 flex items-center"><img className="block h-7.5 w-auto opacity-[0.82]" src="TODO" alt="Google" /></div><Mono size={10}>2022 Black Founders Fund</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center"><div className="h-8.5 flex items-center"><img className="block h-6 w-auto opacity-[0.82]" src="TODO" alt="Techstars" /></div><Mono size={10}>2023 accelerator</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center"><div className="h-8.5 flex items-center"><img className="block h-7 w-auto opacity-[0.82]" src="TODO" alt="Logitech" /></div><Mono size={10}>Gamr X 2023 sponsor</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center"><div className="h-8.5 flex items-center"><img className="block h-7 w-auto opacity-[0.82]" src="TODO" alt="Ballantine’s" /></div><Mono size={10}>Gamr X 2023 sponsor</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center"><div className="h-8.5 flex items-center"><img className="block h-7 w-auto opacity-[0.82]" src="TODO" alt="Spotify" /></div><Mono size={10}>2024 campaign</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center"><div className="h-8.5 flex items-center"><img className="block h-6 w-auto opacity-[0.82]" src="TODO" alt="Lenovo" /></div><Mono size={10}>Ecosystem partner</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center"><div className="h-8.5 flex items-center"><img className="block h-6 w-auto opacity-[0.82]" src="TODO" alt="Carven" /></div><Mono size={10}>Venue partner</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center"><div className="h-8.5 flex items-center"><img className="block h-8.5 w-auto opacity-[0.82]" src="TODO" alt="Nivea" /></div><Mono size={10}>Brand partner</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center"><div className="h-8.5 flex items-center"><img className="block h-9.5 w-auto opacity-[0.82]" src="TODO" alt="Golden Penny" /></div><Mono size={10}>Brand partner</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center" aria-hidden="true"><div className="h-8.5 flex items-center"><img className="block h-7.5 w-auto opacity-[0.82]" src="TODO" alt="Google" /></div><Mono size={10}>2022 Black Founders Fund</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center" aria-hidden="true"><div className="h-8.5 flex items-center"><img className="block h-6 w-auto opacity-[0.82]" src="TODO" alt="Techstars" /></div><Mono size={10}>2023 accelerator</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center" aria-hidden="true"><div className="h-8.5 flex items-center"><img className="block h-7 w-auto opacity-[0.82]" src="TODO" alt="Logitech" /></div><Mono size={10}>Gamr X 2023 sponsor</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center" aria-hidden="true"><div className="h-8.5 flex items-center"><img className="block h-7 w-auto opacity-[0.82]" src="TODO" alt="Ballantine’s" /></div><Mono size={10}>Gamr X 2023 sponsor</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center" aria-hidden="true"><div className="h-8.5 flex items-center"><img className="block h-7 w-auto opacity-[0.82]" src="TODO" alt="Spotify" /></div><Mono size={10}>2024 campaign</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center" aria-hidden="true"><div className="h-8.5 flex items-center"><img className="block h-6 w-auto opacity-[0.82]" src="TODO" alt="Lenovo" /></div><Mono size={10}>Ecosystem partner</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center" aria-hidden="true"><div className="h-8.5 flex items-center"><img className="block h-6 w-auto opacity-[0.82]" src="TODO" alt="Carven" /></div><Mono size={10}>Venue partner</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center" aria-hidden="true"><div className="h-8.5 flex items-center"><img className="block h-8.5 w-auto opacity-[0.82]" src="TODO" alt="Nivea" /></div><Mono size={10}>Brand partner</Mono></li><li className="px-11 py-0 gap-3 flex-none flex flex-col items-center" aria-hidden="true"><div className="h-8.5 flex items-center"><img className="block h-9.5 w-auto opacity-[0.82]" src="TODO" alt="Golden Penny" /></div><Mono size={10}>Brand partner</Mono></li></ul></div></div></section>
-<Section><SectionHeading eyebrow="One company" title="How we work." lead="Gamr makes games, publishes them, trains the people who build them, and helps brands take part in gaming." /><div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 grid"><div className="p-7 border-2 border-blue gap-4 bg-surface flex flex-col min-h-[300px] box-border"><Icon name="gamepad" size={32} className="text-blue-text flex-none block" /><div><Mono tone="blue">Identity</Mono></div><CardTitle size={24}>Games</CardTitle><p className="m-0 max-w-[360px] text-[15px] leading-[1.6] text-muted">Original games from Gamr Studios, built for Roblox, mobile, web and other platforms.</p><div className="mt-[auto]"><TextLink href="/games">Explore our games →</TextLink></div></div><div className="p-7 border border-line gap-4 bg-surface flex flex-col min-h-[300px] box-border"><Icon name="rocket" size={32} className="text-blue-text flex-none block" /><div><Mono tone="blue">Publishing</Mono></div><CardTitle size={24}>Publishing</CardTitle><p className="m-0 max-w-[360px] text-[15px] leading-[1.6] text-muted">A selective route that helps African studios fund, finish, launch and grow their games.</p><div className="mt-[auto]"><TextLink href="/publishing#criteria">Our criteria →</TextLink></div></div><div className="p-7 border border-line gap-4 bg-surface flex flex-col min-h-[300px] box-border"><Icon name="book" size={32} className="text-blue-text flex-none block" /><div><Mono tone="blue">Talent pipeline</Mono></div><CardTitle size={24}>Lab</CardTitle><p className="m-0 max-w-[360px] text-[15px] leading-[1.6] text-muted">Practical programmes that take people from playing games to building them.</p><div className="mt-[auto]"><TextLink href="/lab">Explore the Lab →</TextLink></div></div><div className="p-7 border border-line gap-4 bg-surface flex flex-col min-h-[300px] box-border"><Icon name="target" size={32} className="text-blue-text flex-none block" /><div><Mono tone="blue">For brands</Mono></div><CardTitle size={24}>Managed Services</CardTitle><p className="m-0 max-w-[360px] text-[15px] leading-[1.6] text-muted">Strategy, playable experiences, creators, esports and live activation for brands and agencies.</p><div className="mt-[auto]"><TextLink href="/for-brands#brief">Brief us →</TextLink></div></div></div></Section>
-<Section tone="alt"><figure className="m-0 gap-7 flex flex-col max-w-[1000px]"><span className="w-14 h-1 bg-red" aria-hidden="true" /><blockquote className="m-0 text-[length:clamp(30px,4.2cqw,58px)] leading-[1.02] font-extrabold tracking-[-0.035em] uppercase text-white">“To build games that are African made and globally played.”</blockquote><figcaption className="gap-2 flex flex-col"><span className="text-[17px] font-bold text-white">Eniola Edun, CEO & Co-founder, Gamr</span><Mono>At the Lab opening, University of Lagos, March 2025</Mono></figcaption></figure></Section>
-<Section tone="alt"><SectionHeading eyebrow="Our games" title="A growing library." lead="Live, in development and on the way, across Roblox, mobile, web and other platforms. Every title carries an honest status." /><div className="grid-cols-1 md:grid-cols-3 gap-4 grid"><article className="border border-line bg-surface flex flex-col"><ImageBlock src={img.afro} alt="AfroDrive gameplay" className="md:h-[280px] border-b border-line" /><div className="p-7 gap-4 flex flex-col flex-1"><Badge tone="live">Live on Roblox</Badge><div className="text-[length:clamp(30px,3.2cqw,44px)] leading-[0.92] font-black tracking-[-0.045em] uppercase">AfroDrive</div><p className="m-0 max-w-[420px] text-[15px] leading-[1.6] text-muted">Start your journey as a local bus driver and build your own transport empire across vibrant African-inspired cities.</p><div className="mt-[auto] gap-3.5 flex flex-col"><Mono>A Gamr Original · By Gamr Studios · Illustration</Mono><Button href="https://www.roblox.com/games/122444818290399" variant="primary" size="sm">Play on Roblox</Button></div></div></article><article className="border border-line bg-surface flex flex-col"><ImageBlock src={img.mcl1} alt="My City Life gameplay" className="md:h-[280px] border-b border-line" /><div className="p-7 gap-4 flex flex-col flex-1"><Badge tone="live">Live on web</Badge><div className="text-[length:clamp(30px,3.2cqw,44px)] leading-[0.92] font-black tracking-[-0.045em] uppercase">My City Life</div><p className="m-0 max-w-[420px] text-[15px] leading-[1.6] text-muted">A free life sim in a low-poly New York City: hustle, commute, make rent and vote alongside real players.</p><div className="mt-[auto] gap-3.5 flex flex-col"><Mono>A Gamr Original · Web · mycitylife.gg</Mono><Button href="https://mycitylife.gg/" variant="primary" size="sm">Play in Browser</Button></div></div></article><article className="border border-line bg-surface flex flex-col"><ImageBlock src={img.crossroads} alt="Crossroads: Lagos Stories gameplay" className="md:h-[280px] border-b border-line" /><div className="p-7 gap-4 flex flex-col flex-1"><Badge tone="dev">In development</Badge><div className="text-[length:clamp(30px,3.2cqw,44px)] leading-[0.92] font-black tracking-[-0.045em] uppercase">Crossroads: Lagos Stories</div><p className="m-0 max-w-[420px] text-[15px] leading-[1.6] text-muted">A narrative game of decision-based storytelling, drawn from the lives of young Nigerians.</p><div className="mt-[auto] gap-3.5 flex flex-col"><Mono>A Gamr Original · Concept illustration · No release date</Mono></div></div></article></div><div className="mt-7"><TextLink href="/games">See all games →</TextLink></div></Section>
-<Section><div className="gap-y-12 gap-x-[72px] flex flex-wrap"><div className="gap-6 flex-[1_1_380px] flex flex-col"><Eyebrow>Publishing</Eyebrow><h2 className="m-0 text-[length:clamp(32px,4.6cqw,66px)] leading-[0.96] font-extrabold tracking-[-0.04em] uppercase text-white">Built in Africa. Ready for the world.</h2><p className="m-0 max-w-[560px] text-[16px] leading-[1.6] text-muted">Gamr publishes its own games and selectively partners with African studios, with a support package agreed for each title.</p><div className="*:flex-[1_1_100%] md:*:flex-[0_1_auto] gap-3 flex flex-wrap"><Button href="/games" variant="primary">See What We’ve Published</Button><Button href="/publishing#pitch" variant="ghost">Pitch a Game</Button></div></div><div className="gap-7 flex-[1.3_1_460px] flex flex-col"><div className="border-b border-line"><div className="px-0 py-5.5 border-t border-line gap-y-2 gap-x-6 flex flex-wrap"><div className="gap-2 flex-[1_1_220px] flex flex-col"><CardTitle>Gamr Originals</CardTitle><div><Mono tone="blue">A Gamr Original</Mono></div></div><div className="flex-[2_1_300px]"><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Games initiated and controlled by Gamr, built by Gamr Studios.</p></div></div><div className="px-0 py-5.5 border-t border-line gap-y-2 gap-x-6 flex flex-wrap"><div className="gap-2 flex-[1_1_220px] flex flex-col"><CardTitle>Publishing Partners</CardTitle><div><Mono tone="blue">Published by Gamr</Mono></div></div><div className="flex-[2_1_300px]"><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Games from independent African studios. Studios normally keep their underlying IP; publishing rights are agreed by platform, territory and term.</p></div></div><div className="px-0 py-5.5 border-t border-line gap-y-2 gap-x-6 flex flex-wrap"><div className="gap-2 flex-[1_1_220px] flex flex-col"><CardTitle>Co-development</CardTitle><div><Mono tone="blue">Developed with Gamr Studios</Mono></div></div><div className="flex-[2_1_300px]"><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Games built together, with responsibilities and rights agreed project by project.</p></div></div></div><div className="grid-cols-1 md:grid-cols-2 gap-3 grid"><div className="p-5.5 border border-line gap-2.5 bg-surface flex flex-col"><Icon name="money" size={24} className="text-blue-text flex-none block" /><Mono tone="blue">01</Mono><CardTitle size={20}>Fund</CardTitle><p className="m-0 max-w-[300px] text-[14px] leading-[1.6] text-muted">Milestone funding where approved.</p></div><div className="p-5.5 border border-line gap-2.5 bg-surface flex flex-col"><Icon name="checkCircle" size={24} className="text-blue-text flex-none block" /><Mono tone="blue">02</Mono><CardTitle size={20}>Finish</CardTitle><p className="m-0 max-w-[300px] text-[14px] leading-[1.6] text-muted">Production support, playtesting and QA coordination.</p></div><div className="p-5.5 border border-line gap-2.5 bg-surface flex flex-col"><Icon name="rocket" size={24} className="text-blue-text flex-none block" /><Mono tone="blue">03</Mono><CardTitle size={20}>Launch</CardTitle><p className="m-0 max-w-[300px] text-[14px] leading-[1.6] text-muted">Positioning, marketing and store release.</p></div><div className="p-5.5 border border-line gap-2.5 bg-surface flex flex-col"><Icon name="trendUp" size={24} className="text-blue-text flex-none block" /><Mono tone="blue">04</Mono><CardTitle size={20}>Grow</CardTitle><p className="m-0 max-w-[300px] text-[14px] leading-[1.6] text-muted">Analytics, live operations and lifecycle planning.</p></div></div></div></div></Section>
-<Section tone="alt"><div className="gap-y-10 gap-x-16 flex flex-wrap items-stretch"><div className="flex-[1_1_420px]"><ImageBlock src={img.labRoom} alt="Guests and learners at the Lab workstations during the launch" className="md:h-[500px] border border-line" position="center 60%" /></div><div className="gap-6 flex-[1_1_400px] flex flex-col justify-center"><Eyebrow>Lab</Eyebrow><h2 className="m-0 text-[length:clamp(32px,4.6cqw,66px)] leading-[0.96] font-extrabold tracking-[-0.04em] uppercase text-white">Turn players into builders.</h2><p className="m-0 max-w-[560px] text-[16px] leading-[1.6] text-muted">Practical skills, mentorship and production sprints that lead to real projects and industry pathways.</p><div className="grid-cols-1 md:grid-cols-2 gap-6 grid"><div className="pt-5 border-t-2 border-blue-text gap-2.5 flex flex-col"><div className="text-[length:clamp(36px,4.4cqw,60px)] leading-[1] font-black tracking-[-0.04em] text-white">1,350+</div><div className="text-[16px] font-bold uppercase text-white">People trained</div><Mono size={10}>Source: gamr.africa homepage, 2026</Mono></div><div className="pt-5 border-t-2 border-blue-text gap-2.5 flex flex-col"><div className="text-[length:clamp(36px,4.4cqw,60px)] leading-[1] font-black tracking-[-0.04em] text-white">4</div><div className="text-[16px] font-bold uppercase text-white">Lab partners</div><Mono size={10}>French Embassy, NSC, HP, Unreal Engine · UNILAG, 2025</Mono></div></div><div className="*:flex-[1_1_100%] md:*:flex-[0_1_auto] gap-3 flex flex-wrap"><Button href="/lab#programmes" variant="primary">Explore Programmes</Button><Button href="/lab#partner" variant="ghost">Partner With the Lab</Button></div></div></div></Section>
-<Section><SectionHeading eyebrow="For Brands · Managed Services" title="Help your brand show up, and belong, in gaming." lead="A separate route for brands and agencies, backed by a team that makes its own games." /><div className="grid-cols-1 md:grid-cols-3 gap-4 grid"><Card><IconBox name="bulb" /><CardTitle>Strategy and insight</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Gaming strategy and audience understanding for your market.</p></Card><Card><IconBox name="gamepad" /><CardTitle>Branded games</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Branded games and Roblox experiences.</p></Card><Card><IconBox name="trophy" /><CardTitle>Esports and tournaments</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Tournament and esports operations.</p></Card><Card><IconBox name="users" /><CardTitle>Creators and community</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Creator and community campaigns.</p></Card><Card><IconBox name="broadcast" /><CardTitle>Live activations</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Experiential production and live events.</p></Card><Card><IconBox name="chart" /><CardTitle>Measurement</CardTitle><p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">Reporting against the objectives you set.</p></Card></div><div className="mt-8"><div className="*:flex-[1_1_100%] md:*:flex-[0_1_auto] gap-3 flex flex-wrap"><Button href="/for-brands#brief" variant="primary">Brief Us</Button><Button href="/for-brands#work" variant="ghost">View Case Studies</Button></div></div></Section>
-<Section tone="alt"><SectionHeading eyebrow="Insights" title="Case studies, articles and game launches." /><div className="grid-cols-1 md:grid-cols-3 gap-4 grid"><Link className="border border-line flex flex-col bg-surface" href="/insights"><ImageBlock src={img.spotifyCase} alt="Spotify × Gamr: where music meets gaming" className="md:h-[200px] border-b border-line" /><div className="p-6 gap-3 flex flex-col"><Mono tone="blue">Case study</Mono><CardTitle size={20}>Spotify × Gamr: where music meets gaming</CardTitle><Mono>10 Aug 2026</Mono></div></Link><Link className="border border-line flex flex-col bg-surface" href="/insights"><ImageBlock src={img.caseHero} alt="Launching Prime Hydration to Nigeria’s gamers" className="md:h-[200px] border-b border-line" /><div className="p-6 gap-3 flex flex-col"><Mono tone="blue">Case study</Mono><CardTitle size={20}>Launching Prime Hydration to Nigeria’s gamers</CardTitle><Mono>9 Aug 2026</Mono></div></Link><Link className="border border-line flex flex-col bg-surface" href="/insights"><ImageBlock src={img.mcl1} alt="My City Life: New York is live on web" className="md:h-[200px] border-b border-line" /><div className="p-6 gap-3 flex flex-col"><Mono tone="blue">Game launch</Mono><CardTitle size={20}>My City Life: New York is live on web</CardTitle><Mono>Oct 2026</Mono></div></Link></div><div className="mt-7"><TextLink href="/insights">All insights →</TextLink></div></Section>
-<section className="border-t border-line bg-black"><div className="px-[clamp(20px,5cqw,80px)] py-[clamp(56px,7cqw,96px)] mx-auto max-w-[1280px] box-border"><div className="gap-4 flex flex-wrap"><div className="p-[clamp(28px,4cqw,56px)] border-2 border-blue gap-8 flex-[1_1_320px] bg-blue flex flex-col justify-between min-h-[220px] box-border"><div className="text-[length:clamp(26px,3.2cqw,44px)] leading-[1] font-extrabold tracking-[-0.035em] uppercase text-white">Have a playable game?</div><div><Button href="/publishing#pitch" variant="white">Pitch a Game</Button></div></div><div className="p-[clamp(28px,4cqw,56px)] border-2 border-white gap-8 flex-[1_1_320px] bg-black flex flex-col justify-between min-h-[220px] box-border"><div className="text-[length:clamp(26px,3.2cqw,44px)] leading-[1] font-extrabold tracking-[-0.035em] uppercase text-white">Have a brand brief?</div><div><Button href="/for-brands#brief" variant="ghost">Brief Us</Button></div></div></div></div></section>
+      <section className="bg-black bg-grid">
+        <div className="mx-auto box-border flex min-h-[760px] max-w-[1280px] flex-wrap items-center gap-x-16 gap-y-12 px-[clamp(20px,5cqw,80px)] py-[72px]">
+          <div className="flex flex-[1_1_560px] flex-col gap-7">
+            <Eyebrow>Gamr Games &amp; Publishing</Eyebrow>
+            <HeroTitle line1="Games from Africa." line2="Played everywhere." />
+            <HeroLead>
+              Gamr creates original games and selectively partners with African studios to fund, finish, launch and grow distinctive titles.
+            </HeroLead>
+            <ButtonGroup>
+              <Button href="/games">Explore Our Games</Button>
+              <Button href="/publishing#pitch" variant="ghost">
+                Pitch a Game
+              </Button>
+            </ButtonGroup>
+            <div>
+              <TextLink href="/for-brands#brief">Building for a brand? Brief Us →</TextLink>
+            </div>
+          </div>
+          <figure className="m-0 flex flex-[1_1_100%] flex-col items-center gap-3.5 md:flex-[0_0_300px] md:items-stretch">
+            <div className="aspect-[368/656] w-[min(260px,70vw)] overflow-hidden border-2 border-line-strong bg-white md:w-[300px]">
+              <HeroVideo
+                src="/assets/video/build-africa-on-roblox.mp4"
+                poster="/assets/video/build-africa-on-roblox-poster.jpg"
+                label="Gamr Studios introduces Build Africa on Roblox"
+              />
+            </div>
+            <figcaption>
+              <Mono size={10}>Gamr Studios · Build Africa on Roblox</Mono>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section className="border-t border-line bg-black" aria-label="Trusted by industry leaders">
+        <div className="mx-auto box-border flex max-w-[1280px] flex-wrap items-center gap-x-12 gap-y-6 px-[clamp(20px,5cqw,80px)] py-10">
+          <div className="flex-none">
+            <Mono>Trusted by industry leaders</Mono>
+          </div>
+          <LogoMarquee logos={LOGOS} />
+        </div>
+      </section>
+
+      <Section>
+        <SectionHeading
+          eyebrow="One company"
+          title="How we work."
+          lead="Gamr makes games, publishes them, trains the people who build them, and helps brands take part in gaming."
+        />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {PARTS.map((p, i) => (
+            <div
+              key={p.title}
+              className={`box-border flex min-h-[300px] flex-col gap-4 bg-surface p-7 ${i === 0 ? "border-2 border-blue" : "border border-line"}`}
+            >
+              <Icon name={p.icon} size={32} className="block flex-none text-blue-text" />
+              <div>
+                <Mono tone="blue">{p.tag}</Mono>
+              </div>
+              <CardTitle size={24}>{p.title}</CardTitle>
+              <p className="m-0 max-w-[360px] text-[15px] leading-[1.6] text-muted">{p.text}</p>
+              <div className="mt-auto">
+                <TextLink href={p.href}>{p.link}</TextLink>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section tone="alt">
+        <QuoteBlock
+          quote="“To build games that are African made and globally played.”"
+          name="Eniola Edun, CEO & Co-founder, Gamr"
+          context="At the Lab opening, University of Lagos, March 2025"
+        />
+      </Section>
+
+      <Section tone="alt">
+        <SectionHeading
+          eyebrow="Our games"
+          title="A growing library."
+          lead="Live, in development and on the way, across Roblox, mobile, web and other platforms. Every title carries an honest status."
+        />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {GAMES.map((g) => (
+            <article key={g.title} className="flex flex-col border border-line bg-surface">
+              <ImageBlock src={g.src} alt={g.alt} sizes="(min-width: 761px) 33vw, 100vw" className="border-b border-line md:h-[280px]" />
+              <div className="flex flex-1 flex-col gap-4 p-7">
+                <Badge tone={g.tone}>{g.status}</Badge>
+                <div className="text-[length:clamp(30px,3.2cqw,44px)] leading-[0.92] font-black tracking-[-0.045em] uppercase">
+                  {g.title}
+                </div>
+                <p className="m-0 max-w-[420px] text-[15px] leading-[1.6] text-muted">{g.text}</p>
+                <div className="mt-auto flex flex-col gap-3.5">
+                  <Mono>{g.meta}</Mono>
+                  {g.cta && (
+                    <Button href={g.cta.href} size="sm">
+                      {g.cta.label}
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="mt-7">
+          <TextLink href="/games">See all games →</TextLink>
+        </div>
+      </Section>
+
+      <Section>
+        <div className="flex flex-wrap gap-x-[72px] gap-y-12">
+          <div className="flex flex-[1_1_380px] flex-col gap-6">
+            <Eyebrow>Publishing</Eyebrow>
+            <H2>Built in Africa. Ready for the world.</H2>
+            <Body>
+              Gamr publishes its own games and selectively partners with African studios, with a support package agreed for each title.
+            </Body>
+            <ButtonGroup>
+              <Button href="/games">See What We’ve Published</Button>
+              <Button href="/publishing#pitch" variant="ghost">
+                Pitch a Game
+              </Button>
+            </ButtonGroup>
+          </div>
+          <div className="flex flex-[1.3_1_460px] flex-col gap-7">
+            <div className="border-b border-line">
+              {LANES.map((l) => (
+                <div key={l.title} className="flex flex-wrap gap-x-6 gap-y-2 border-t border-line py-5.5">
+                  <div className="flex flex-[1_1_220px] flex-col gap-2">
+                    <CardTitle>{l.title}</CardTitle>
+                    <div>
+                      <Mono tone="blue">{l.tag}</Mono>
+                    </div>
+                  </div>
+                  <div className="flex-[2_1_300px]">
+                    <p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">{l.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              {SUPPORT.map((s, i) => (
+                <div key={s.title} className="flex flex-col gap-2.5 border border-line bg-surface p-5.5">
+                  <Icon name={s.icon} className="block flex-none text-blue-text" />
+                  <Mono tone="blue">{String(i + 1).padStart(2, "0")}</Mono>
+                  <CardTitle size={20}>{s.title}</CardTitle>
+                  <p className="m-0 max-w-[300px] text-[14px] leading-[1.6] text-muted">{s.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section tone="alt">
+        <div className="flex flex-wrap items-stretch gap-x-16 gap-y-10">
+          <div className="flex-[1_1_420px]">
+            <ImageBlock
+              src={img.labRoom}
+              alt="Guests and learners at the Lab workstations during the launch"
+              className="border border-line md:h-[500px]"
+              position="center 60%"
+            />
+          </div>
+          <div className="flex flex-[1_1_400px] flex-col justify-center gap-6">
+            <Eyebrow>Lab</Eyebrow>
+            <H2>Turn players into builders.</H2>
+            <Body>Practical skills, mentorship and production sprints that lead to real projects and industry pathways.</Body>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <Stat value="1,350+" label="People trained" source="Source: gamr.africa homepage, 2026" />
+              <Stat value="4" label="Lab partners" source="French Embassy, NSC, HP, Unreal Engine · UNILAG, 2025" />
+            </div>
+            <ButtonGroup>
+              <Button href="/lab#programmes">Explore Programmes</Button>
+              <Button href="/lab#partner" variant="ghost">
+                Partner With the Lab
+              </Button>
+            </ButtonGroup>
+          </div>
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeading
+          eyebrow="For Brands · Managed Services"
+          title="Help your brand show up, and belong, in gaming."
+          lead="A separate route for brands and agencies, backed by a team that makes its own games."
+        />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {CAPABILITIES.map((c) => (
+            <Card key={c.title}>
+              <IconBox name={c.icon} />
+              <CardTitle>{c.title}</CardTitle>
+              <p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">{c.text}</p>
+            </Card>
+          ))}
+        </div>
+        <div className="mt-8">
+          <ButtonGroup>
+            <Button href="/for-brands#brief">Brief Us</Button>
+            <Button href="/for-brands#work" variant="ghost">
+              View Case Studies
+            </Button>
+          </ButtonGroup>
+        </div>
+      </Section>
+
+      <Section tone="alt">
+        <SectionHeading eyebrow="Insights" title="Case studies, articles and game launches." />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {STORIES.map((s) => (
+            <Link key={s.title} className="flex flex-col border border-line bg-surface" href="/insights">
+              <ImageBlock src={s.src} alt={s.title} sizes="(min-width: 761px) 33vw, 100vw" className="border-b border-line md:h-[200px]" />
+              <div className="flex flex-col gap-3 p-6">
+                <Mono tone="blue">{s.kind}</Mono>
+                <CardTitle size={20}>{s.title}</CardTitle>
+                <Mono>{s.date}</Mono>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-7">
+          <TextLink href="/insights">All insights →</TextLink>
+        </div>
+      </Section>
+
+      <section className="border-t border-line bg-black">
+        <div className="mx-auto box-border max-w-[1280px] px-[clamp(20px,5cqw,80px)] py-[clamp(56px,7cqw,96px)]">
+          <div className="flex flex-wrap gap-4">
+            <DoorPanel tone="blue" title="Have a playable game?" cta="Pitch a Game" href="/publishing#pitch" />
+            <DoorPanel tone="dark" title="Have a brand brief?" cta="Brief Us" href="/for-brands#brief" />
+          </div>
+        </div>
+      </section>
     </PageShell>
   );
 }
