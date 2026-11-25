@@ -1,0 +1,16 @@
+{
+  "name": "gamr-rebrand",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@12.23.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "tsc --noEmit",
+    "visual-check": "tsx scripts/visual-check.ts"
+  }
+}
