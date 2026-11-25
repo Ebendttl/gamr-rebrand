@@ -24,7 +24,7 @@ export function Timeline({ steps }: { steps: TimelineStep[] }) {
           return (
             <li
               key={step.title}
-              className="relative grid grid-cols-[48px_1fr] gap-x-4 gap-y-1.5 pb-6.5 md:flex md:flex-col md:gap-3.5 md:pr-3 md:pb-0"
+              className="relative grid grid-cols-[48px_1fr] gap-3.5 pb-6.5 md:flex md:flex-col md:pr-3 md:pb-0"
             >
               <div className="hidden h-4 md:block">
                 <Mono size={10}>{step.label}</Mono>

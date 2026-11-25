@@ -89,7 +89,7 @@ export default function CompanyPage() {
   return (
     <PageShell active="company">
       <section className="relative overflow-hidden bg-black bg-grid">
-        <HeroImage src={img.labTalk} alt="" className="md:w-[56%]" position="35% 40%" />
+        <HeroImage src={img.labTalk} className="md:w-[56%]" position="35% 40%" />
         <div className="relative mx-auto box-border flex max-w-[1280px] flex-col justify-end gap-7 px-[clamp(20px,5cqw,80px)] pt-10 pb-14 md:min-h-[600px] md:pt-[72px] md:pb-[72px]">
           <div className="flex-[1_1_40px]" />
           <Eyebrow>Company · About</Eyebrow>

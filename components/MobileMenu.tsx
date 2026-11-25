@@ -62,7 +62,7 @@ export function MobileMenu({ active }: { active: NavKey }) {
         aria-label={open ? "Close menu" : "Open menu"}
         onClick={() => setOpen((o) => !o)}
         className={cn(
-          "flex h-12 w-12 cursor-pointer items-center justify-center border bg-transparent p-0 text-white",
+          "box-content flex h-12 w-12 cursor-pointer items-center justify-center border bg-transparent p-0 text-white",
           open ? "border-blue-text" : "border-line-strong",
         )}
       >

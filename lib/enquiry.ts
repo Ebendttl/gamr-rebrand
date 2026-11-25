@@ -38,10 +38,12 @@ export const UPLOAD_ACCEPT = ".pdf,.doc,.docx,.ppt,.pptx,.key,.txt";
 /** Name of the hidden honeypot field; real visitors never fill it. */
 export const HONEYPOT = "website";
 
-const text = (max: number) => z.string().trim().max(max);
-const required = (max: number, message: string) => text(max).min(1, message);
-const email = z.string().trim().max(200).email("Enter a valid email address.");
-const phone = text(40).regex(/^[+()\d\s-]*$/, "Enter a valid phone number.");
+/** Absent form fields arrive as undefined; treat them as empty strings so the friendly messages apply. */
+const str = <T extends z.ZodType>(schema: T) => z.preprocess((v) => (typeof v === "string" ? v : ""), schema);
+const text = (max: number) => str(z.string().trim().max(max));
+const required = (max: number, message: string) => str(z.string().trim().min(1, message).max(max));
+const email = str(z.string().trim().max(200).email("Enter a valid email address."));
+const phone = str(z.string().trim().max(40).regex(/^[+()\d\s-]*$/, "Enter a valid phone number."));
 const consent = z.literal("on", { message: "Please agree to the privacy policy." });
 
 export const contactSchema = z.object({

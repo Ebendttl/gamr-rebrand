@@ -34,6 +34,8 @@ const VIEWPORTS = [
   { label: "1440", width: 1440, height: 900 },
 ];
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 const OVERFLOW_WIDTHS = [320, 360, 390, 414, 600, 760, 761, 768, 900, 1024, 1025, 1280, 1440];
 
 /** Shared freeze: no CSS motion, first crossfade frame and first carousel dot shown. */
@@ -49,34 +51,28 @@ const REFERENCE_CSS = `
 
 async function settle(page: Page, extraCss: string) {
   await page.addStyleTag({ content: FREEZE_CSS + extraCss });
-  // Load every lazy image, then return to the top.
-  await page.evaluate(async () => {
-    for (let y = 0; y < document.body.scrollHeight; y += 600) {
-      window.scrollTo(0, y);
-      await new Promise((r) => setTimeout(r, 30));
-    }
-    window.scrollTo(0, 0);
-  });
-  await page.waitForLoadState("networkidle");
+  // Load every lazy image, then return to the top. Timers in the page are frozen by page.clock, so pace from Node.
+  const height = await page.evaluate(() => document.body.scrollHeight);
+  for (let y = 0; y < height; y += 600) {
+    await page.evaluate((top) => window.scrollTo(0, top), y);
+    await sleep(60);
+  }
+  await page.evaluate(() => window.scrollTo(0, 0));
+  // Off-screen lazy images (e.g. later carousel slides) load eagerly; then poll from Node until all are decoded.
+  await page.evaluate(() => document.querySelectorAll("img[loading=lazy]").forEach((i) => i.setAttribute("loading", "eager")));
+  for (let waited = 0; waited < 15_000; waited += 200) {
+    const pending = await page.evaluate(() => Array.from(document.images).filter((i) => !i.complete).length);
+    if (pending === 0) break;
+    await sleep(200);
+  }
   await page.evaluate(async () => {
     await document.fonts.ready;
-    await Promise.all(
-      Array.from(document.images)
-        .filter((i) => !i.complete)
-        .map(
-          (i) =>
-            new Promise((r) => {
-              i.addEventListener("load", r, { once: true });
-              i.addEventListener("error", r, { once: true });
-            }),
-        ),
-    );
     for (const v of Array.from(document.querySelectorAll("video"))) {
       v.pause();
       v.currentTime = 0;
     }
   });
-  await page.waitForTimeout(400);
+  await sleep(400);
 }
 
 function compare(a: PNG, b: PNG, diffPath: string) {
