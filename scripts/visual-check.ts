@@ -4,7 +4,7 @@
  * Also checks 320–1440 px for horizontal overflow.
  *
  * Usage: pnpm build && pnpm start   (in another terminal)
- *        pnpm visual-check [page ...]   BASE_URL defaults to http://localhost:3000
+ *        pnpm visual-check [page ...]   BASE_URL defaults to http://localhost:3000; WIDTHS=768,1024 for other widths
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -29,10 +29,13 @@ const PAGES = [
   { name: "contact", route: "/contact", hash: "contact" },
 ];
 
-const VIEWPORTS = [
-  { label: "390", width: 390, height: 844 },
-  { label: "1440", width: 1440, height: 900 },
-];
+// WIDTHS=768,1024 pnpm visual-check compares other widths too (height 900).
+const VIEWPORTS = process.env.WIDTHS
+  ? process.env.WIDTHS.split(",").map((w) => ({ label: w, width: Number(w), height: 900 }))
+  : [
+      { label: "390", width: 390, height: 844 },
+      { label: "1440", width: 1440, height: 900 },
+    ];
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
