@@ -11,6 +11,7 @@ export function GameSlate({ games }: { games: SlateGame[] }) {
   return (
     <div
       tabIndex={0}
+      role="region"
       aria-label="Game slate, scrolling. Hover or focus to pause."
       className={cn(
         styles.marqueeWrap,
