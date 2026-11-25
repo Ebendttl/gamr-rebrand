@@ -12,5 +12,26 @@
     "start": "next start",
     "lint": "tsc --noEmit",
     "visual-check": "tsx scripts/visual-check.ts"
+  },
+  "dependencies": {
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "resend": "6.39.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/node": "^22.20.5",
+    "@types/pngjs": "^6.0.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "pixelmatch": "8.0.0",
+    "playwright": "1.65.1",
+    "pngjs": "7.0.0",
+    "postcss": "^8.5.33",
+    "tailwindcss": "4.3.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
   }
 }
