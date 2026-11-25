@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/site";
 import { Badge, type BadgeTone } from "@/components/Badge";
 import { Button, type ButtonVariant } from "@/components/Button";
 import { ButtonGroup } from "@/components/ButtonGroup";
@@ -110,6 +111,12 @@ function FeatureCard({ icon, title, text }: Feature) {
     </Card>
   );
 }
+
+export const metadata = pageMetadata(
+  "/lab",
+  "Lab",
+  "Turn players into builders. Programmes that take people from playing games to building them, at the Lab, University of Lagos.",
+);
 
 export default function LabPage() {
   return (

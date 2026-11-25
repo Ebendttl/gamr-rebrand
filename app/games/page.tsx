@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/site";
 import Link from "next/link";
 import { Badge, type BadgeTone } from "@/components/Badge";
 import { Button } from "@/components/Button";
@@ -119,6 +120,12 @@ function GameTile({ tile }: { tile: Tile }) {
     </article>
   );
 }
+
+export const metadata = pageMetadata(
+  "/games",
+  "Games",
+  "A growing library of original games from Gamr Studios, across Roblox, mobile, web and other platforms.",
+);
 
 export default function GamesPage() {
   return (

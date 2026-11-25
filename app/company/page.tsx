@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/site";
 import Link from "next/link";
 import { Button } from "@/components/Button";
 import { ButtonGroup } from "@/components/ButtonGroup";
@@ -77,6 +78,12 @@ const MORE: { icon: IconName; title: string; text: string; link: string; href: s
     href: "/contact",
   },
 ];
+
+export const metadata = pageMetadata(
+  "/company",
+  "Company",
+  "An African games company: original games, selective publishing, game-making talent and credible brand participation in gaming.",
+);
 
 export default function CompanyPage() {
   return (

@@ -64,8 +64,4 @@
     outline: 2px solid #3b82f6;
     outline-offset: 3px;
   }
-  /* In-page anchors land below the header. */
-  [id] {
-    scroll-margin-top: 24px;
-  }
 }

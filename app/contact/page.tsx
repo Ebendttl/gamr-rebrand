@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/site";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Button, type ButtonVariant } from "@/components/Button";
 import { Card } from "@/components/Card";
@@ -43,6 +44,12 @@ const DETAILS: { icon: IconName; label: string; value: string; href?: string }[]
   { icon: "phone", label: "Call", value: "+234 905 570 2309", href: "tel:+2349055702309" },
   { icon: "mail", label: "Email", value: "info@gamr.africa", href: "mailto:info@gamr.africa" },
 ];
+
+export const metadata = pageMetadata(
+  "/contact",
+  "Contact",
+  "Tell us what you need. Pick a quick route, or send a message and we’ll route it to the right team.",
+);
 
 export default function ContactPage() {
   return (

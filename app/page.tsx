@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/site";
 import Link from "next/link";
 import { Badge, type BadgeTone } from "@/components/Badge";
 import { Button } from "@/components/Button";
@@ -151,6 +152,15 @@ const STORIES: { kind: string; title: string; date: string; src: ImageSrc }[] = 
   { kind: "Case study", title: "Launching Prime Hydration to Nigeria’s gamers", date: "9 Aug 2026", src: img.caseHero },
   { kind: "Game launch", title: "My City Life: New York is live on web", date: "Oct 2026", src: img.mcl1 },
 ];
+
+export const metadata = {
+  ...pageMetadata(
+    "/",
+    "Games from Africa. Played everywhere.",
+    "Gamr creates original games and selectively partners with African studios to fund, finish, launch and grow distinctive titles.",
+  ),
+  title: { absolute: "Gamr: Games from Africa. Played everywhere." },
+};
 
 export default function HomePage() {
   return (

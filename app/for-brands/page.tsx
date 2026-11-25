@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/site";
 import { BriefForm } from "@/components/forms/BriefForm";
 import { Button } from "@/components/Button";
 import { ButtonGroup } from "@/components/ButtonGroup";
@@ -87,6 +88,12 @@ const WHY: IconCard[] = [
 function CardText({ children }: { children: string }) {
   return <p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-muted">{children}</p>;
 }
+
+export const metadata = pageMetadata(
+  "/for-brands",
+  "For Brands",
+  "Help your brand show up, and belong, in gaming: strategy, playable experiences, creators, esports and live activation, from a team that builds its own games.",
+);
 
 export default function ForBrandsPage() {
   return (

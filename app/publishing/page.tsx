@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/site";
 import { Button } from "@/components/Button";
 import { ButtonGroup } from "@/components/ButtonGroup";
 import { Card } from "@/components/Card";
@@ -94,6 +95,12 @@ const PITCH_MATERIALS = [
   "IP ownership declaration",
   "Consent and privacy acknowledgement",
 ];
+
+export const metadata = pageMetadata(
+  "/publishing",
+  "Publishing",
+  "Built in Africa. Ready for the world. You build the game; Gamr helps fund, finish, launch and grow it through a package agreed for each title.",
+);
 
 export default function PublishingPage() {
   return (

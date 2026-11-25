@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/site";
 import Link from "next/link";
 import { Button } from "@/components/Button";
 import { CardTitle } from "@/components/CardTitle";
@@ -21,6 +22,12 @@ const STORIES: { kind: string; title: string; date: string; src: ImageSrc; posit
   { kind: "Article", title: "Inside the Lab: from players to builders", date: "Gamr", src: img.labRoom, position: "center 60%" },
   { kind: "Game launch", title: "AfroDrive: build a transport empire on Roblox", date: "Gamr", src: img.afro },
 ];
+
+export const metadata = pageMetadata(
+  "/insights",
+  "Insights",
+  "Notes from the build: case studies, articles and game launches from across Gamr.",
+);
 
 export default function InsightsPage() {
   return (
